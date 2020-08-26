@@ -348,3 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+BurgerMonkeys/BurgerMonkeys/.DS_Store
+BurgerMonkeys/BurgerMonkeys.Android/.DS_Store
+BurgerMonkeys/.DS_Store
+.DS_Store
