@@ -1,4 +1,5 @@
 ﻿using System;
+using BurgerMonkeys.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,13 @@ namespace BurgerMonkeys
         {
             InitializeComponent();
 
+            Register();
             MainPage = new MainPage();
+        }
+
+        void Register()
+        {
+            DependencyService.Register<IPostService, PostService>();
         }
 
         protected override void OnStart()
