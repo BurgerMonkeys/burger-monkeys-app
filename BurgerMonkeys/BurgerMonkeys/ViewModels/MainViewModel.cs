@@ -1,25 +1,28 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using BurgerMonkeys.Model;
 using BurgerMonkeys.Services;
-using Xamarin.Forms.Internals;
 
 namespace BurgerMonkeys.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public ObservableCollection<string> Items { get; set; }
+        public ObservableCollection<Post> Items { get; set; }
 
         readonly IPostService _postService;
 
         public MainViewModel(IPostService postService)
         {
             _postService = postService;
-            Items = new ObservableCollection<string>();
+            Items = new ObservableCollection<Post>();
         }
 
         public async override Task InitializeAsync()
         {
+            if (Items.Any())
+                return;
+
             var items = await _postService.Get().ConfigureAwait(false);
             foreach (var item in items)
             {

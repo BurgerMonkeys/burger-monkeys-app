@@ -12,7 +12,7 @@ namespace BurgerMonkeys
             InitializeComponent();
 
             Register();
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         void Register()

@@ -1,16 +1,61 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
+    x:Class="BurgerMonkeys.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    iOS:Page.UseSafeArea="True"
-    x:Class="BurgerMonkeys.MainPage">
-    <CollectionView
-        ItemsSource="{Binding Items}">
+    Title="BurgerMonkeys"
+    iOS:Page.UseSafeArea="True">
+    <CollectionView ItemsSource="{Binding Items}">
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Label
-                    Text="{Binding .}"/>
+                <StackLayout Spacing="0">
+
+                    <Grid ColumnSpacing="10" RowSpacing="{OnPlatform Android=0, iOS=5}">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+
+                        <Image
+                            Grid.RowSpan="3"
+                            Aspect="AspectFill"
+                            Source="{Binding Image}" />
+                        <Label
+                            Grid.Column="1"
+                            Margin="0,8,8,0"
+                            FontAttributes="Bold"
+                            Text="{Binding Author}"
+                            TextColor="#0B5A9D" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,8,0"
+                            FontSize="Large"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="2"
+                            Text="{Binding Title}" />
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,0,8,8"
+                            HorizontalTextAlignment="End"
+                            Text="{Binding Date, StringFormat='{0:d}'}"
+                            TextColor="#707070" />
+
+
+
+                    </Grid>
+                    <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
+                </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
