@@ -1,7 +1,5 @@
-﻿using System;
-using BurgerMonkeys.Services;
+﻿using BurgerMonkeys.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace BurgerMonkeys
 {
@@ -17,7 +15,8 @@ namespace BurgerMonkeys
 
         void Register()
         {
-            DependencyService.Register<IPostService, PostService>();
+            DependencyService.RegisterSingleton<IPostService>(new PostService());
+            DependencyService.RegisterSingleton<IWpService>(new WpService());
         }
 
         protected override void OnStart()

@@ -17,7 +17,8 @@ namespace BurgerMonkeys
         {
             InitializeComponent();
             var postService = DependencyService.Get<IPostService>();
-            BindingContext = new MainViewModel(postService);
+            var wpService = DependencyService.Get<IWpService>();
+            BindingContext = new MainViewModel(postService, wpService);
         }
 
         protected override async void OnAppearing()

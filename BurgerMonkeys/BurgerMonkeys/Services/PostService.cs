@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BurgerMonkeys.Model;
 
@@ -8,10 +9,41 @@ namespace BurgerMonkeys.Services
     public interface IPostService
     {
         Task<IEnumerable<Post>> Get();
+        Task<IEnumerable<Post>> Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts);
     }
 
     public class PostService : IPostService
     {
+        public Task<IEnumerable<Post>> Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts)
+        {
+            var posts = new List<Post>();
+            foreach (var wpPost in wpPosts)
+            {
+                var post = new Post
+                {
+                    Id = wpPost.Id,
+                    Title = wpPost.Title.Rendered,
+                    Date = wpPost.Date,
+                    Slug = wpPost.Slug,
+                    Url = wpPost.Link
+                };
+
+                var authors = wpPost.Embedded.Author;
+                if (authors.Any())
+                    post.Author = authors.First().Name;
+                if (!(wpPost.Embedded.WpFeaturedmedia is null))
+                {
+                    var media = wpPost.Embedded.WpFeaturedmedia.First();
+                    if (!(media is null))
+                    {
+                        post.Image = media.SourceUrl;
+                    }
+                }
+                posts.Add(post);
+            }
+            return Task.FromResult<IEnumerable<Post>>(posts);
+        }
+
         public async Task<IEnumerable<Post>> Get()
         {
             return await Task.FromResult(new List<Post>

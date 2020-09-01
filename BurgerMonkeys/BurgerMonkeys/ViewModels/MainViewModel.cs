@@ -11,10 +11,13 @@ namespace BurgerMonkeys.ViewModels
         public ObservableCollection<Post> Items { get; set; }
 
         readonly IPostService _postService;
+        readonly IWpService _wpService;
 
-        public MainViewModel(IPostService postService)
+        public MainViewModel(IPostService postService,
+                             IWpService wpService)
         {
             _postService = postService;
+            _wpService = wpService;
             Items = new ObservableCollection<Post>();
         }
 
@@ -23,7 +26,10 @@ namespace BurgerMonkeys.ViewModels
             if (Items.Any())
                 return;
 
-            var items = await _postService.Get().ConfigureAwait(false);
+            var wpPosts = await _wpService.GetAll().ConfigureAwait(false);
+
+            //var items = await _postService.Get().ConfigureAwait(false);
+            var items = await _postService.Convert(wpPosts);
             foreach (var item in items)
             {
                 Items.Add(item);
