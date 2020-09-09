@@ -126,6 +126,9 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>3.1.3</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -133,5 +136,8 @@
       <Project>{85669B40-4B8C-4EE4-A4AE-DB0C9AB7EFE3}</Project>
       <Name>BurgerMonkeys</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\monkey.json" />
   </ItemGroup>
 </Project>

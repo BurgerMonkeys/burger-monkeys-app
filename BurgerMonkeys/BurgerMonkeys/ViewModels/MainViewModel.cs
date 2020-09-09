@@ -27,9 +27,7 @@ namespace BurgerMonkeys.ViewModels
                 return;
 
             var wpPosts = await _wpService.GetAll().ConfigureAwait(false);
-
-            //var items = await _postService.Get().ConfigureAwait(false);
-            var items = await _postService.Convert(wpPosts);
+            var items = await _postService.Convert(wpPosts).ConfigureAwait(false);
             foreach (var item in items)
             {
                 Items.Add(item);

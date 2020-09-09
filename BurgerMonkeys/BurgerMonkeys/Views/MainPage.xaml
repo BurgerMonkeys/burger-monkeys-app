@@ -3,10 +3,34 @@
     x:Class="BurgerMonkeys.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="BurgerMonkeys"
     iOS:Page.UseSafeArea="True">
     <CollectionView ItemsSource="{Binding Items}">
+        <CollectionView.EmptyView>
+            <Grid
+                Padding="16"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="2*, *"
+                VerticalOptions="FillAndExpand">
+
+                <forms:AnimationView
+                    Animation="monkey.json"
+                    AutoPlay="True"
+                    HorizontalOptions="FillAndExpand"
+                    Loop="True"
+                    VerticalOptions="FillAndExpand" />
+
+                <Label
+                    Grid.Row="1"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    Text="Carregando..."
+                    VerticalOptions="Start" />
+
+            </Grid>
+        </CollectionView.EmptyView>
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout Spacing="0">
