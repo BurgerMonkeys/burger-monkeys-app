@@ -37,6 +37,9 @@ namespace BurgerMonkeys.Services
                     if (!(media is null))
                     {
                         post.Image = media.SourceUrl;
+                        post.Thumbnail = "http://i1.wp.com/" + media.SourceUrl
+                                    .Replace("https://", "")
+                                    .Replace("http://", "") + "?h=150";
                     }
                 }
                 posts.Add(post);

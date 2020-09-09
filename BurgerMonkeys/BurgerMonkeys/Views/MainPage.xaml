@@ -51,7 +51,7 @@
                         <Image
                             Grid.RowSpan="3"
                             Aspect="AspectFill"
-                            Source="{Binding Image}" />
+                            Source="{Binding Thumbnail}" />
                         <Label
                             Grid.Column="1"
                             Margin="0,8,8,0"
@@ -74,8 +74,6 @@
                             HorizontalTextAlignment="End"
                             Text="{Binding Date, StringFormat='{0:d}'}"
                             TextColor="#707070" />
-
-
 
                     </Grid>
                     <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
