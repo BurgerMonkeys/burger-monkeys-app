@@ -13,16 +13,17 @@ namespace BurgerMonkeys.Services
 
     public class WpService : IWpService
     {
-        readonly WordPressClient _client;
+        static WordPressClient _client;
 
+        static WordPressClient Client => _client ?? new WordPressClient(Constants.Url);
+       
         public WpService()
         {
-            _client = new WordPressClient(Constants.Url);
         }
 
         public async Task<IEnumerable<Post>> GetAll()
         {
-            var posts = await _client.Posts.GetAll(true);
+            var posts = await Client.Posts.GetAll(true);
             return posts;
         }
     }
