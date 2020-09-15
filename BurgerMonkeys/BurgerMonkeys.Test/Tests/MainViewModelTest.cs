@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoBogus;
+using Bogus;
 using BurgerMonkeys.Services;
 using BurgerMonkeys.ViewModels;
 using FakeItEasy;
 using FluentAssertions;
+using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions;
 using WordPressPCL.Models;
 using Xunit;
 
@@ -22,26 +25,9 @@ namespace BurgerMonkeys.Test.Tests
             postService = A.Fake<IPostService>();
         }
 
-        [Fact]
-        public async Task InitializeShouldReturnAPostTest()
-        {
-            var listPosts = new AutoFaker<Post>().Generate(1);
-            var listCovertedPost = new AutoFaker<Model.Post>().Generate(1);
-
-            A.CallTo(() => wpService.GetAll()).Returns(listPosts);
-            A.CallTo(() => postService.Convert(listPosts)).Returns(listCovertedPost);
-
-            var viewModel = new MainViewModel(postService, wpService);
-            await viewModel.InitializeAsync();
-
-            viewModel.Items.Should().BeEquivalentTo(listCovertedPost);
-        }
-
         [Theory]
+        [InlineData(5)]
         [InlineData(10)]
-        [InlineData(100)]
-        [InlineData(1000)]
-        [InlineData(10000)]
         public async Task InitializeShouldReturnPosts(int posts)
         {
             var listPosts = new AutoFaker<Post>().Generate(posts);
@@ -54,7 +40,31 @@ namespace BurgerMonkeys.Test.Tests
             await viewModel.InitializeAsync();
 
             viewModel.Items.Should().BeEquivalentTo(listCovertedPost);
-            viewModel.Items.Count().Should().Be(20);
+            viewModel.Items.Count.Should().Be(posts);
+        }
+
+        [Fact]
+        public async Task InitializeItemsShouldBeEmpty()
+        {
+            var invalidListPosts = new AutoFaker<Post>().Generate(1);
+
+            A.CallTo(() => wpService.GetAll()).Returns(invalidListPosts);
+            A.CallTo(() => postService.Convert(invalidListPosts)).Returns(new List<Model.Post>());
+            
+            var viewModel = new MainViewModel(postService, wpService);
+            await viewModel.InitializeAsync();
+
+            viewModel.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public async Task InitializeShouldNotCallServices()
+        {
+            var viewModel = new MainViewModel(postService, wpService);
+            viewModel.Items.Add(new Faker<Model.Post>().Generate());
+
+            A.CallTo(() => wpService.GetAll()).MustNotHaveHappened();
+            A.CallTo(() => postService.Convert(A.CollectionOfDummy<Post>(1))).MustNotHaveHappened();
         }
     }
 }
