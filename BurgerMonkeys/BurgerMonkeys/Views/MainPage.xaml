@@ -3,6 +3,7 @@
     x:Class="BurgerMonkeys.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="BurgerMonkeys"
@@ -48,10 +49,15 @@
                             <RowDefinition Height="20" />
                         </Grid.RowDefinitions>
 
-                        <Image
+                        <ffimageloading:CachedImage
+                            Grid.RowSpan="3"
+                            DownsampleToViewSize="true"
+                            Source="{Binding Thumbnail}" />
+
+                        <!--<Image
                             Grid.RowSpan="3"
                             Aspect="AspectFill"
-                            Source="{Binding Thumbnail}" />
+                            Source="{Binding Thumbnail}" />-->
                         <Label
                             Grid.Column="1"
                             Margin="0,8,8,0"
