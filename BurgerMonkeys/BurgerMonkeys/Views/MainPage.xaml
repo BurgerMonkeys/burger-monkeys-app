@@ -72,7 +72,7 @@
                                 Margin="0,0,8,0"
                                 FontSize="Large"
                                 LineBreakMode="TailTruncation"
-                                MaxLines="2"
+                                MaxLines="3"
                                 VerticalTextAlignment="Center"
                                 Text="{Binding Title}" />
 

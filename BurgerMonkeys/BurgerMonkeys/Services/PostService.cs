@@ -22,7 +22,7 @@ namespace BurgerMonkeys.Services
                 var post = new Post
                 {
                     Id = wpPost.Id,
-                    Title = wpPost.Title.Rendered,
+                    Title = wpPost.Title.Rendered.Replace("&#8211;", "-"),
                     Date = wpPost.Date,
                     Slug = wpPost.Slug,
                     Url = wpPost.Link
