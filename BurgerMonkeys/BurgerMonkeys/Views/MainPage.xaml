@@ -8,83 +8,88 @@
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="BurgerMonkeys"
     iOS:Page.UseSafeArea="True">
-    <CollectionView ItemsSource="{Binding Items}">
-        <CollectionView.EmptyView>
-            <Grid
-                Padding="16"
-                HorizontalOptions="FillAndExpand"
-                RowDefinitions="2*, *"
-                VerticalOptions="FillAndExpand">
-
-                <forms:AnimationView
-                    Animation="monkey.json"
-                    AutoPlay="True"
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" >
+        <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView.EmptyView>
+                <Grid
+                    Padding="16"
                     HorizontalOptions="FillAndExpand"
-                    Loop="True"
-                    VerticalOptions="FillAndExpand" />
+                    RowDefinitions="2*, *"
+                    VerticalOptions="FillAndExpand">
 
-                <Label
-                    Grid.Row="1"
-                    FontSize="Large"
-                    HorizontalTextAlignment="Center"
-                    Text="Carregando..."
-                    VerticalOptions="Start" />
+                    <forms:AnimationView
+                        Animation="monkey.json"
+                        AutoPlay="True"
+                        HorizontalOptions="FillAndExpand"
+                        Loop="True"
+                        VerticalOptions="FillAndExpand" />
 
-            </Grid>
-        </CollectionView.EmptyView>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout Spacing="0">
+                    <Label
+                        Grid.Row="1"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Center"
+                        Text="Carregando..."
+                        VerticalOptions="Start" />
 
-                    <Grid ColumnSpacing="10" RowSpacing="{OnPlatform Android=0, iOS=5}">
+                </Grid>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Spacing="0">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        <Grid ColumnSpacing="10" RowSpacing="{OnPlatform Android=0, iOS=5}">
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="20" />
-                        </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <ffimageloading:CachedImage
-                            Grid.RowSpan="3"
-                            DownsampleToViewSize="true"
-                            Source="{Binding Thumbnail}" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                        <!--<Image
-                            Grid.RowSpan="3"
-                            Aspect="AspectFill"
-                            Source="{Binding Thumbnail}" />-->
-                        <Label
-                            Grid.Column="1"
-                            Margin="0,8,8,0"
-                            FontAttributes="Bold"
-                            Text="{Binding Author}"
-                            TextColor="#0B5A9D" />
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="0,0,8,0"
-                            FontSize="Large"
-                            LineBreakMode="TailTruncation"
-                            MaxLines="2"
-                            Text="{Binding Title}" />
+                            <ffimageloading:CachedImage
+                                Grid.RowSpan="3"
+                                DownsampleToViewSize="true"
+                                Source="{Binding Thumbnail}"
+                                LoadingPlaceholder="bm_pattern"
+                                ErrorPlaceholder="bm_pattern"
+                                Aspect="AspectFill"
+                                />
 
-                        <Label
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            Margin="0,0,8,8"
-                            HorizontalTextAlignment="End"
-                            Text="{Binding Date, StringFormat='{0:d}'}"
-                            TextColor="#707070" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="0,8,8,0"
+                                FontAttributes="Bold"
+                                Text="{Binding Author}"
+                                VerticalTextAlignment="Center"
+                                TextColor="#0B5A9D" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,0,8,0"
+                                FontSize="Large"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                VerticalTextAlignment="Center"
+                                Text="{Binding Title}" />
 
-                    </Grid>
-                    <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0,0,8,8"
+                                Text="{Binding Date, StringFormat='{0:d}'}"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="End"
+                                TextColor="#707070" />
+
+                        </Grid>
+                        <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>

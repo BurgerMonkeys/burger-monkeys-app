@@ -41,10 +41,10 @@ namespace BurgerMonkeys.Services
                                     .Replace("https://", "")
                                     .Replace("http://", "") + "?h=150";
                     }
-                    else
-                    {
-                        post.Thumbnail = "http://burgermonkeys.com/wp-content/uploads/2020/05/BM-pattern-1.png";
-                    }
+                }
+                else
+                {
+                    post.Thumbnail = "bm_pattern";
                 }
                 posts.Add(post);
             }
