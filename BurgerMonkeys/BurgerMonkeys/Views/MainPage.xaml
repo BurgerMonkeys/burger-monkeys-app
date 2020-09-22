@@ -8,88 +8,99 @@
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="BurgerMonkeys"
     iOS:Page.UseSafeArea="True">
-    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" >
-        <CollectionView ItemsSource="{Binding Items}">
-            <CollectionView.EmptyView>
-                <Grid
-                    Padding="16"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="2*, *"
-                    VerticalOptions="FillAndExpand">
+    <StackLayout>
 
-                    <forms:AnimationView
-                        Animation="monkey.json"
-                        AutoPlay="True"
+        <SearchBar
+            Placeholder="Buscar um artigo"
+            Text="{Binding SearchText}" />
+    
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" >
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.EmptyView>
+                    <Grid
+                        Padding="16"
                         HorizontalOptions="FillAndExpand"
-                        Loop="True"
-                        VerticalOptions="FillAndExpand" />
+                        RowDefinitions="2*, *"
+                        VerticalOptions="FillAndExpand">
 
-                    <Label
-                        Grid.Row="1"
-                        FontSize="Large"
-                        HorizontalTextAlignment="Center"
-                        Text="Carregando..."
-                        VerticalOptions="Start" />
+                        <forms:AnimationView
+                            Animation="monkey.json"
+                            AutoPlay="True"
+                            HorizontalOptions="FillAndExpand"
+                            Loop="True"
+                            VerticalOptions="FillAndExpand" />
 
-                </Grid>
-            </CollectionView.EmptyView>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Spacing="0">
+                        <Label
+                            Grid.Row="1"
+                            FontSize="Large"
+                            HorizontalTextAlignment="Center"
+                            Text="Carregando..."
+                            VerticalOptions="Start" />
 
-                        <Grid ColumnSpacing="10" RowSpacing="{OnPlatform Android=0, iOS=5}">
+                    </Grid>
+                </CollectionView.EmptyView>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                <CollectionView.Header>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="2*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Spacing="0">
 
-                            <ffimageloading:CachedImage
-                                Grid.RowSpan="3"
-                                DownsampleToViewSize="true"
-                                Source="{Binding Thumbnail}"
-                                LoadingPlaceholder="bm_pattern"
-                                ErrorPlaceholder="bm_pattern"
-                                Aspect="AspectFill"
-                                />
+                            <Grid ColumnSpacing="10" RowSpacing="{OnPlatform Android=0, iOS=5}">
 
-                            <Label
-                                Grid.Column="1"
-                                Margin="0,8,8,0"
-                                FontAttributes="Bold"
-                                Text="{Binding Author}"
-                                VerticalTextAlignment="Center"
-                                TextColor="#0B5A9D" />
-                            <Label
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="0,0,8,0"
-                                FontSize="Large"
-                                LineBreakMode="TailTruncation"
-                                MaxLines="3"
-                                VerticalTextAlignment="Center"
-                                Text="{Binding Title}" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Label
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Margin="0,0,8,8"
-                                Text="{Binding Date, StringFormat='{0:d}'}"
-                                VerticalTextAlignment="Center"
-                                HorizontalTextAlignment="End"
-                                TextColor="#707070" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                        </Grid>
-                        <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+                                <ffimageloading:CachedImage
+                                    Grid.RowSpan="3"
+                                    DownsampleToViewSize="true"
+                                    Source="{Binding Thumbnail}"
+                                    LoadingPlaceholder="bm_pattern"
+                                    ErrorPlaceholder="bm_pattern"
+                                    Aspect="AspectFill"
+                                    />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="0,8,8,0"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Author}"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="#0B5A9D" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,0,8,0"
+                                    FontSize="Large"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="3"
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Title}" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Margin="0,0,8,8"
+                                    Text="{Binding Date, StringFormat='{0:d}'}"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="End"
+                                    TextColor="#707070" />
+
+                            </Grid>
+                            <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>
