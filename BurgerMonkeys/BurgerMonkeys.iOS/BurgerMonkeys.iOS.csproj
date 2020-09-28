@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\monkey.json" />
+    <BundleResource Include="Resources\empty.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\bm_pattern.imageset\" />

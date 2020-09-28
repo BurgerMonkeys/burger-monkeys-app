@@ -10,11 +10,9 @@
     iOS:Page.UseSafeArea="True">
     <StackLayout>
 
-        <SearchBar
-            Placeholder="Buscar um artigo"
-            Text="{Binding SearchText}" />
-    
-        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" >
+        <SearchBar Placeholder="Buscar um artigo" Text="{Binding SearchText}" />
+
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView ItemsSource="{Binding Items}">
                 <CollectionView.EmptyView>
                     <Grid
@@ -24,7 +22,7 @@
                         VerticalOptions="FillAndExpand">
 
                         <forms:AnimationView
-                            Animation="monkey.json"
+                            Animation="{Binding EmptyImage}"
                             AutoPlay="True"
                             HorizontalOptions="FillAndExpand"
                             Loop="True"
@@ -34,15 +32,13 @@
                             Grid.Row="1"
                             FontSize="Large"
                             HorizontalTextAlignment="Center"
-                            Text="Carregando..."
+                            Text="{Binding EmptyMessage}"
                             VerticalOptions="Start" />
 
                     </Grid>
                 </CollectionView.EmptyView>
 
-                <CollectionView.Header>
-
-                </CollectionView.Header>
+                <CollectionView.Header />
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Spacing="0">
@@ -62,20 +58,19 @@
 
                                 <ffimageloading:CachedImage
                                     Grid.RowSpan="3"
-                                    DownsampleToViewSize="true"
-                                    Source="{Binding Thumbnail}"
-                                    LoadingPlaceholder="bm_pattern"
-                                    ErrorPlaceholder="bm_pattern"
                                     Aspect="AspectFill"
-                                    />
+                                    DownsampleToViewSize="true"
+                                    ErrorPlaceholder="bm_pattern"
+                                    LoadingPlaceholder="bm_pattern"
+                                    Source="{Binding Thumbnail}" />
 
                                 <Label
                                     Grid.Column="1"
                                     Margin="0,8,8,0"
                                     FontAttributes="Bold"
                                     Text="{Binding Author}"
-                                    VerticalTextAlignment="Center"
-                                    TextColor="#0B5A9D" />
+                                    TextColor="#0B5A9D"
+                                    VerticalTextAlignment="Center" />
                                 <Label
                                     Grid.Row="1"
                                     Grid.Column="1"
@@ -83,17 +78,17 @@
                                     FontSize="Large"
                                     LineBreakMode="TailTruncation"
                                     MaxLines="3"
-                                    VerticalTextAlignment="Center"
-                                    Text="{Binding Title}" />
+                                    Text="{Binding Title}"
+                                    VerticalTextAlignment="Center" />
 
                                 <Label
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     Margin="0,0,8,8"
-                                    Text="{Binding Date, StringFormat='{0:d}'}"
-                                    VerticalTextAlignment="Center"
                                     HorizontalTextAlignment="End"
-                                    TextColor="#707070" />
+                                    Text="{Binding Date, StringFormat='{0:d}'}"
+                                    TextColor="#707070"
+                                    VerticalTextAlignment="Center" />
 
                             </Grid>
                             <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />

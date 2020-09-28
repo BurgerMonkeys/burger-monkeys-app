@@ -18,6 +18,27 @@ namespace BurgerMonkeys.ViewModels
         readonly IPostService _postService;
         readonly IWpService _wpService;
 
+        private string _emptyMessage;
+        public string EmptyMessage
+        {
+            get => _emptyMessage;
+            set => SetProperty(ref _emptyMessage, value);
+        }
+
+        private string _emptyImage;
+        public string EmptyImage
+        {
+            get => _emptyImage;
+            set => SetProperty(ref _emptyImage, value);
+        }
+
+        private bool _autoPlay;
+        public bool AutoPlay
+        {
+            get => _autoPlay;
+            set => SetProperty(ref _autoPlay, value);
+        }
+
         private string _searchText;
         public string SearchText {
             get => _searchText;
@@ -55,6 +76,10 @@ namespace BurgerMonkeys.ViewModels
 
         private async Task GetPostsAsync()
         {
+            AutoPlay = false;
+            EmptyMessage = "Carregando...";
+            EmptyImage = "monkey.json";
+            AutoPlay = true;
             var wpPosts = await _wpService.GetAll().ConfigureAwait(false);
             AllItems = (await _postService.Convert(wpPosts).ConfigureAwait(false)).ToList();
             Items.Clear();
@@ -63,6 +88,10 @@ namespace BurgerMonkeys.ViewModels
                 Items.Add(item);
             }
             IsBusy = false;
+            AutoPlay = false;
+            EmptyMessage = "Nenhum post encontrado";
+            EmptyImage = "empty.json";
+            AutoPlay = true;
         }
 
         private async void ExecuteSearchCommand()
