@@ -13,7 +13,11 @@
         <SearchBar Placeholder="Buscar um artigo" Text="{Binding SearchText}" />
 
         <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-            <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView
+                ItemsSource="{Binding Items}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                SelectionChangedCommand="{Binding SelectionChangedCommand, Mode=OneTime}"
+                SelectionMode="Single">
                 <CollectionView.EmptyView>
                     <Grid
                         Padding="16"

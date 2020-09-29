@@ -25,7 +25,8 @@ namespace BurgerMonkeys.Services
                     Title = wpPost.Title.Rendered.Replace("&#8211;", "-"),
                     Date = wpPost.Date,
                     Slug = wpPost.Slug,
-                    Url = wpPost.Link
+                    Url = wpPost.Link,
+                    Body = wpPost.Content.Rendered
                 };
 
                 var authors = wpPost.Embedded.Author;
