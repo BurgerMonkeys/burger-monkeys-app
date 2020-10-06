@@ -1,4 +1,5 @@
-﻿using BurgerMonkeys.Model;
+﻿using System.Text;
+using BurgerMonkeys.Model;
 using Xamarin.Forms;
 
 namespace BurgerMonkeys.ViewModels
@@ -25,9 +26,30 @@ namespace BurgerMonkeys.ViewModels
         {
             _post = post;
             PostTitle = _post.Title;
+
+            var cssFile = "leitor.css";
+
+            var sb = new StringBuilder();
+
+            sb.Append("<html>");
+            sb.Append("<head>");
+            sb.Append($"<link href=\"{cssFile}\" rel=\"stylesheet\" />");
+            sb.Append("</head>");
+            sb.Append("<body>");
+            sb.Append($"<h1>{_post.Title}</h1>");
+            if (!string.IsNullOrWhiteSpace(_post.Image))
+            {
+                sb.Append($"<figure><img src=\"{_post.Image}\"></figure>");
+                sb.Append("<br/>");
+            }
+            sb.Append($"<p class=\"details\">Por <span class=\"author\">{_post.Author}</span> em <span class=\"publish-date\">{_post.Date.ToString("d")}</span></p>");
+            sb.Append(_post.Body);
+            sb.Append("</body>");
+            sb.Append("</html>");
+
             var html = new HtmlWebViewSource
             {
-                Html = $"<h1>{_post.Title}</h1>{_post.Body}"
+                Html = sb.ToString()
             };
             Body = html;
         }

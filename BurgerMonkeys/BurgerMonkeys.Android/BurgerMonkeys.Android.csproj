@@ -106,6 +106,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\monkey.json" />
     <AndroidAsset Include="Assets\empty.json" />
+    <AndroidAsset Include="Assets\leitor.css" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
