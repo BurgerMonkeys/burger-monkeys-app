@@ -7,10 +7,12 @@
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="BurgerMonkeys"
+    iOS:NavigationPage.PrefersLargeTitles="True"
+    BackgroundColor="#f0f0f0"
     iOS:Page.UseSafeArea="True">
     <StackLayout>
 
-        <SearchBar Placeholder="Buscar um artigo" Text="{Binding SearchText}" />
+        <SearchBar PlaceholderColor="#707070" Placeholder="Buscar um artigo" Text="{Binding SearchText}" />
 
         <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView
@@ -27,9 +29,11 @@
 
                         <forms:AnimationView
                             Animation="{Binding EmptyImage}"
-                            AutoPlay="True"
+                            RepeatMode="Infinite"
+                            HeightRequest="30"
+                            WidthRequest="30"
+                            AnimationSource="AssetOrBundle"
                             HorizontalOptions="FillAndExpand"
-                            Loop="True"
                             VerticalOptions="FillAndExpand" />
 
                         <Label
@@ -82,6 +86,7 @@
                                     FontSize="Large"
                                     LineBreakMode="TailTruncation"
                                     MaxLines="3"
+                                    TextColor="Black"
                                     Text="{Binding Title}"
                                     VerticalTextAlignment="Center" />
 

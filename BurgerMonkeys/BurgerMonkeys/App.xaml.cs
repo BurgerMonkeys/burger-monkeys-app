@@ -1,16 +1,24 @@
 ﻿using BurgerMonkeys.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace BurgerMonkeys
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         public App()
         {
             InitializeComponent();
 
             Register();
-            MainPage = new NavigationPage(new MainPage());
+
+            var navigation = new Xamarin.Forms.NavigationPage(new MainPage());
+            navigation.On<iOS>().SetPrefersLargeTitles(true);
+            navigation.BarBackgroundColor = Color.FromHex("#f0f0f0");
+            navigation.BarTextColor = Color.Black;
+
+            MainPage = navigation;
         }
 
         void Register()
