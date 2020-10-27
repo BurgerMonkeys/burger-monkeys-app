@@ -3,16 +3,21 @@
     x:Class="BurgerMonkeys.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:BurgerMonkeys.Converters"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:vm="clr-namespace:BurgerMonkeys.ViewModels"
     Title="BurgerMonkeys"
     iOS:NavigationPage.PrefersLargeTitles="True"
-    BackgroundColor="#f0f0f0"
-    iOS:Page.UseSafeArea="True">
-    <StackLayout>
+    iOS:Page.UseSafeArea="True"
+    BackgroundColor="#f0f0f0">
+    <StackLayout Spacing="0">
 
-        <SearchBar PlaceholderColor="#707070" Placeholder="Buscar um artigo" Text="{Binding SearchText}" />
+        <SearchBar
+            Placeholder="Buscar um artigo"
+            PlaceholderColor="#707070"
+            Text="{Binding SearchText}" />
 
         <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <CollectionView
@@ -23,18 +28,19 @@
                 <CollectionView.EmptyView>
                     <Grid
                         Padding="16"
+                        BackgroundColor="White"
                         HorizontalOptions="FillAndExpand"
                         RowDefinitions="2*, *"
                         VerticalOptions="FillAndExpand">
 
                         <forms:AnimationView
                             Animation="{Binding EmptyImage}"
-                            RepeatMode="Infinite"
-                            HeightRequest="30"
-                            WidthRequest="30"
                             AnimationSource="AssetOrBundle"
+                            HeightRequest="30"
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand" />
+                            RepeatMode="Infinite"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="30" />
 
                         <Label
                             Grid.Row="1"
@@ -49,59 +55,103 @@
                 <CollectionView.Header />
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Spacing="0">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        BackgroundColor="#007aff"
+                                        Command="{Binding Path=FavoriteCommand, Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}}"
+                                        CommandParameter="{Binding Id}"
+                                        IconImageSource="star"
+                                        IsVisible="{Binding Favorite, Converter={converters:InverseBoolConverter}}"
+                                        Text="Favoritar" />
 
-                            <Grid ColumnSpacing="10" RowSpacing="{OnPlatform Android=0, iOS=5}">
+                                    <SwipeItem
+                                        BackgroundColor="#ff3b30"
+                                        Command="{Binding Path=FavoriteCommand, Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}}"
+                                        CommandParameter="{Binding Id}"
+                                        IconImageSource="star_outline"
+                                        IsVisible="{Binding Favorite}"
+                                        Text="Desfavoritar" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="0">
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="2*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
+                                <Grid
+                                    BackgroundColor="White"
+                                    ColumnSpacing="10"
+                                    RowSpacing="{OnPlatform Android=0,
+                                                            iOS=5}">
 
-                                <ffimageloading:CachedImage
-                                    Grid.RowSpan="3"
-                                    Aspect="AspectFill"
-                                    DownsampleToViewSize="true"
-                                    ErrorPlaceholder="bm_pattern"
-                                    LoadingPlaceholder="bm_pattern"
-                                    Source="{Binding Thumbnail}" />
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="28" />
+                                    </Grid.ColumnDefinitions>
 
-                                <Label
-                                    Grid.Column="1"
-                                    Margin="0,8,8,0"
-                                    FontAttributes="Bold"
-                                    Text="{Binding Author}"
-                                    TextColor="#0B5A9D"
-                                    VerticalTextAlignment="Center" />
-                                <Label
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Margin="0,0,8,0"
-                                    FontSize="Large"
-                                    LineBreakMode="TailTruncation"
-                                    MaxLines="3"
-                                    TextColor="Black"
-                                    Text="{Binding Title}"
-                                    VerticalTextAlignment="Center" />
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="2*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
-                                <Label
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    Margin="0,0,8,8"
-                                    HorizontalTextAlignment="End"
-                                    Text="{Binding Date, StringFormat='{0:d}'}"
-                                    TextColor="#707070"
-                                    VerticalTextAlignment="Center" />
+                                    <ffimageloading:CachedImage
+                                        Grid.RowSpan="3"
+                                        Aspect="AspectFill"
+                                        DownsampleToViewSize="true"
+                                        ErrorPlaceholder="bm_pattern"
+                                        LoadingPlaceholder="bm_pattern"
+                                        Source="{Binding Thumbnail}" />
 
-                            </Grid>
-                            <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
-                        </StackLayout>
+                                    <Label
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        Margin="0,8,8,0"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Author}"
+                                        TextColor="#0B5A9D"
+                                        VerticalTextAlignment="Center" />
+
+                                    <Path
+                                        Grid.Column="2"
+                                        Margin="0,0,8,0"
+                                        Aspect="Uniform"
+                                        Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                                        Fill="#fbc02b"
+                                        HeightRequest="24"
+                                        HorizontalOptions="Center"
+                                        IsVisible="{Binding Favorite}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="24" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        Margin="0,0,8,0"
+                                        FontSize="Large"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="3"
+                                        Text="{Binding Title}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        Margin="0,0,8,8"
+                                        HorizontalTextAlignment="End"
+                                        Text="{Binding Date, StringFormat='{0:d}'}"
+                                        TextColor="#707070"
+                                        VerticalTextAlignment="Center" />
+
+                                </Grid>
+                                <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
+                            </StackLayout>
+                        </SwipeView>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

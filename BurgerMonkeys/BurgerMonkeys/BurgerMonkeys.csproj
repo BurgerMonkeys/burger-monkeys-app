@@ -25,5 +25,6 @@
     <Folder Include="Abstractions\" />
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

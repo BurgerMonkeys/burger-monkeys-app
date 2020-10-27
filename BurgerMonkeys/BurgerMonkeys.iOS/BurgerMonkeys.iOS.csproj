@@ -98,6 +98,14 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_180-1.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_80-2.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon_76.png" />
+    <ImageAsset Include="Assets.xcassets\star.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\star.imageset\star_30.png" />
+    <ImageAsset Include="Assets.xcassets\star.imageset\star_60.png" />
+    <ImageAsset Include="Assets.xcassets\star.imageset\star_90.png" />
+    <ImageAsset Include="Assets.xcassets\star_outline.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\star_outline.imageset\star-outline_90.png" />
+    <ImageAsset Include="Assets.xcassets\star_outline.imageset\star-outline_60.png" />
+    <ImageAsset Include="Assets.xcassets\star_outline.imageset\star-outline_30.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -131,5 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\bm_pattern.imageset\" />
+    <Folder Include="Assets.xcassets\star.imageset\" />
+    <Folder Include="Assets.xcassets\star_outline.imageset\" />
   </ItemGroup>
 </Project>

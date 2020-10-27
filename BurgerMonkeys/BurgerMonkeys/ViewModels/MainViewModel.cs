@@ -63,6 +63,8 @@ namespace BurgerMonkeys.ViewModels
 
         public ICommand SelectionChangedCommand => new Command(ExecutedSelectionChangedCommand);
 
+        public ICommand FavoriteCommand => new Command<int>(ExecutedFavoriteCommand);
+
         public MainViewModel(IPostService postService,
                              IWpService wpService)
         {
@@ -145,6 +147,15 @@ namespace BurgerMonkeys.ViewModels
                 ).ToList();
             Items.Clear();
             resultItems.ForEach(i => Items.Add(i));
+        }
+
+        private void ExecutedFavoriteCommand(int id)
+        {
+            var post = Items.FirstOrDefault(i => i.Id == id);
+            if (post is null)
+                return;
+
+            _postService.SetFavorite(post);
         }
     }
 }

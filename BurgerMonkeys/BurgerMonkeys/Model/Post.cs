@@ -11,5 +11,11 @@ namespace BurgerMonkeys.Model
         public string Url { get; set; }
         public string Slug { get; set; }
         public string Author { get; set; }
+        private bool _favorite;
+        public bool Favorite
+        {
+            get => _favorite;
+            set => SetProperty(ref _favorite, value);
+        }
     }
 }

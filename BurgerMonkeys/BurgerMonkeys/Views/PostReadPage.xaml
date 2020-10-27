@@ -4,8 +4,13 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    iOS:Page.LargeTitleDisplay="Never"
-    Title="Post">
+    Title="Ler Post"
+    iOS:Page.LargeTitleDisplay="Never">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding FavoriteCommand}" IconImageSource="{Binding FavoriteIcon}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <WebView
             HorizontalOptions="FillAndExpand"

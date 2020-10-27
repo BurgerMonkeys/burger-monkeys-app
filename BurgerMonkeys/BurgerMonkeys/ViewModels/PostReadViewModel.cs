@@ -1,12 +1,31 @@
 ﻿using System.Text;
+using System.Windows.Input;
 using BurgerMonkeys.Model;
+using BurgerMonkeys.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BurgerMonkeys.ViewModels
 {
     public class PostReadViewModel : BaseViewModel
     {
+        private readonly IPostService _postService;
+
         private readonly Post _post;
+
+        private string _favoriteText;
+        public string FavoriteText
+        {
+            get => _favoriteText;
+            set => SetProperty(ref _favoriteText, value);
+        }
+
+        private string _favoriteIcon;
+        public string FavoriteIcon
+        {
+            get => _favoriteIcon;
+            set => SetProperty(ref _favoriteIcon, value);
+        }
 
         private string _postTitle;
         public string PostTitle
@@ -22,11 +41,22 @@ namespace BurgerMonkeys.ViewModels
             set => SetProperty(ref _body, value);
         }
 
-        public PostReadViewModel(Post post)
+        public ICommand FavoriteCommand => new Command(ExecutedFavoriteCommand);
+
+        public PostReadViewModel(IPostService postService,
+                                 Post post)
         {
+            _postService = postService;
             _post = post;
             PostTitle = _post.Title;
 
+            SetFavoriteText();
+            SetFavoriteIcon();
+            LoadPost();
+        }
+
+        private void LoadPost()
+        {
             var cssFile = "leitor.css";
 
             var sb = new StringBuilder();
@@ -53,5 +83,30 @@ namespace BurgerMonkeys.ViewModels
             };
             Body = html;
         }
+
+        private void ExecutedFavoriteCommand()
+        {
+            //SetFavorite();
+            _postService.SetFavorite(_post);
+            SetFavoriteText();
+            SetFavoriteIcon();
+        }
+
+        private void SetFavorite()
+        {
+            _post.Favorite = !_post.Favorite;
+            var id = _post.Id.ToString();
+            if (_post.Favorite)
+                Preferences.Set(id, true);
+            else
+                Preferences.Remove(id);
+
+        }
+
+        private void SetFavoriteText() =>
+            FavoriteText = _post.Favorite ? "Remover" : "Favoritar";
+
+        private void SetFavoriteIcon() =>
+            FavoriteIcon = _post.Favorite ? "star" : "star_outline";
     }
 }

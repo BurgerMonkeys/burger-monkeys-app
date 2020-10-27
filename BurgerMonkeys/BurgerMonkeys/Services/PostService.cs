@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BurgerMonkeys.Model;
+using Xamarin.Essentials;
 
 namespace BurgerMonkeys.Services
 {
@@ -10,6 +11,7 @@ namespace BurgerMonkeys.Services
     {
         Task<IEnumerable<Post>> Get();
         Task<IEnumerable<Post>> Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts);
+        void SetFavorite(Post post);
     }
 
     public class PostService : IPostService
@@ -26,7 +28,8 @@ namespace BurgerMonkeys.Services
                     Date = wpPost.Date,
                     Slug = wpPost.Slug,
                     Url = wpPost.Link,
-                    Body = wpPost.Content.Rendered
+                    Body = wpPost.Content.Rendered,
+                    Favorite = Preferences.ContainsKey(wpPost.Id.ToString())
                 };
 
                 var authors = wpPost.Embedded.Author;
@@ -91,6 +94,16 @@ namespace BurgerMonkeys.Services
                     Author = "Eduardo Pacheco"
                 }
             });
+        }
+
+        public void SetFavorite(Post post)
+        {
+            post.Favorite = !post.Favorite;
+            var id = post.Id.ToString();
+            if (post.Favorite)
+                Preferences.Set(id, true);
+            else
+                Preferences.Remove(id);
         }
     }
 }
