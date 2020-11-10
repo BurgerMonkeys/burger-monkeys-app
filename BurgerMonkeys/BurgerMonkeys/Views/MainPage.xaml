@@ -14,5 +14,6 @@
 
     <pages:FeedPage Title="Feed" IconImageSource="feed" />
     <pages:FavoritePage Title="Favoritos" IconImageSource="favorite_folder" />
+    <pages:AuthorsPage Title="Autores" IconImageSource="author" />
 
 </TabbedPage>

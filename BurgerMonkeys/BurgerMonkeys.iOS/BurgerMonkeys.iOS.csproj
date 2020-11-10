@@ -114,6 +114,18 @@
     <ImageAsset Include="Assets.xcassets\favorite_folder.imageset\folder-star.png" />
     <ImageAsset Include="Assets.xcassets\favorite_folder.imageset\folder-star-2.png" />
     <ImageAsset Include="Assets.xcassets\favorite_folder.imageset\folder-star-3.png" />
+    <ImageAsset Include="Assets.xcassets\author.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\author.imageset\account-group.png" />
+    <ImageAsset Include="Assets.xcassets\author.imageset\account-group-2.png" />
+    <ImageAsset Include="Assets.xcassets\author.imageset\account-group-3.png" />
+    <ImageAsset Include="Assets.xcassets\chevron.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\chevron.imageset\chevron-right.png" />
+    <ImageAsset Include="Assets.xcassets\chevron.imageset\chevron-right-2.png" />
+    <ImageAsset Include="Assets.xcassets\chevron.imageset\chevron-right-3.png" />
+    <ImageAsset Include="Assets.xcassets\github.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\github.imageset\github.png" />
+    <ImageAsset Include="Assets.xcassets\github.imageset\github-2.png" />
+    <ImageAsset Include="Assets.xcassets\github.imageset\github-3.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -131,6 +143,9 @@
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="BurgerMonkeys.UI">
+      <Version>1.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -151,5 +166,8 @@
     <Folder Include="Assets.xcassets\star_outline.imageset\" />
     <Folder Include="Assets.xcassets\feed.imageset\" />
     <Folder Include="Assets.xcassets\favorite_folder.imageset\" />
+    <Folder Include="Assets.xcassets\author.imageset\" />
+    <Folder Include="Assets.xcassets\chevron.imageset\" />
+    <Folder Include="Assets.xcassets\github.imageset\" />
   </ItemGroup>
 </Project>
