@@ -126,6 +126,18 @@
     <ImageAsset Include="Assets.xcassets\github.imageset\github.png" />
     <ImageAsset Include="Assets.xcassets\github.imageset\github-2.png" />
     <ImageAsset Include="Assets.xcassets\github.imageset\github-3.png" />
+    <ImageAsset Include="Assets.xcassets\github-white.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\linkedin.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\twitter.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\twitter.imageset\twitter.png" />
+    <ImageAsset Include="Assets.xcassets\twitter.imageset\twitter%281%29.png" />
+    <ImageAsset Include="Assets.xcassets\twitter.imageset\twitter%282%29.png" />
+    <ImageAsset Include="Assets.xcassets\linkedin.imageset\linkedin.png" />
+    <ImageAsset Include="Assets.xcassets\linkedin.imageset\linkedin %281%29.png" />
+    <ImageAsset Include="Assets.xcassets\linkedin.imageset\linkedin %282%29.png" />
+    <ImageAsset Include="Assets.xcassets\github-white.imageset\github.png" />
+    <ImageAsset Include="Assets.xcassets\github-white.imageset\github %281%29.png" />
+    <ImageAsset Include="Assets.xcassets\github-white.imageset\github %282%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -169,5 +181,8 @@
     <Folder Include="Assets.xcassets\author.imageset\" />
     <Folder Include="Assets.xcassets\chevron.imageset\" />
     <Folder Include="Assets.xcassets\github.imageset\" />
+    <Folder Include="Assets.xcassets\github-white.imageset\" />
+    <Folder Include="Assets.xcassets\linkedin.imageset\" />
+    <Folder Include="Assets.xcassets\twitter.imageset\" />
   </ItemGroup>
 </Project>
