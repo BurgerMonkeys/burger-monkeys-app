@@ -1,5 +1,100 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BurgerMonkeys.Views.AuthorProfilePage">
-    <ContentPage.Content>
-    </ContentPage.Content>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="BurgerMonkeys.Views.AuthorProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    iOS:Page.LargeTitleDisplay="Never"
+    Background="#f0f0f0">
+    <Grid ColumnDefinitions="*,200,*" RowDefinitions="100,100,*">
+        <Frame
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="3"
+            Background="White"
+            CornerRadius="32"
+            HasShadow="False" />
+
+        <Image
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Source="https://s.gravatar.com/avatar/9802e38d5bd2cd85db8b0720d5feed29?s=200">
+            <Image.Clip>
+                <EllipseGeometry
+                    Center="100,100"
+                    RadiusX="100"
+                    RadiusY="100" />
+            </Image.Clip>
+        </Image>
+
+        <Ellipse
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            HeightRequest="200"
+            HorizontalOptions="Start"
+            Stroke="#c0c0c0"
+            StrokeThickness="4"
+            WidthRequest="200" />
+
+        <StackLayout
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Padding="16"
+            Spacing="16">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalTextAlignment="Center"
+                Text="Ricardo Prestes" />
+
+            <Label
+                Margin="0,-8,0,0"
+                HorizontalTextAlignment="Center"
+                Text="Mobile development, .NET and C#" />
+
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="16">
+                <StackLayout>
+                    <Label HorizontalTextAlignment="Center" Text="2" />
+                    <Label
+                        Grid.Row="1"
+                        Text="Artigos"
+                        TextColor="#707070" />
+                </StackLayout>
+
+                <BoxView Background="#c0c0c0" WidthRequest="1" />
+
+
+                <ImageButton
+                    Background="Black"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    Source="github_white"
+                    VerticalOptions="Center"
+                    WidthRequest="50" />
+
+                <ImageButton
+                    Background="Black"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    Source="github_white"
+                    VerticalOptions="Center"
+                    WidthRequest="50" />
+
+                <ImageButton
+                    Background="Black"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    Source="github_white"
+                    VerticalOptions="Center"
+                    WidthRequest="50" />
+
+            </StackLayout>
+
+            <Label HorizontalTextAlignment="Start" Text="Bacon ipsum dolor amet buffalo andouille pork belly, pork salami jerky doner filet mignon pork loin sausage kevin ball tip. Jowl pig short ribs ball tip beef ribs. Tongue shoulder swine shankle pork. Shankle short loin ham hamburger meatloaf brisket." />
+        </StackLayout>
+
+    </Grid>
 </ContentPage>
