@@ -18,7 +18,9 @@
         <Image
             Grid.RowSpan="2"
             Grid.Column="1"
-            Source="https://s.gravatar.com/avatar/9802e38d5bd2cd85db8b0720d5feed29?s=200">
+            HeightRequest="200"
+            Source="https://s.gravatar.com/avatar/9802e38d5bd2cd85db8b0720d5feed29?s=200"
+            WidthRequest="200">
             <Image.Clip>
                 <EllipseGeometry
                     Center="100,100"
@@ -30,10 +32,12 @@
         <Ellipse
             Grid.RowSpan="2"
             Grid.Column="1"
+            Margin="0,-6,0,0"
             HeightRequest="200"
-            HorizontalOptions="Start"
+            HorizontalOptions="Center"
             Stroke="#c0c0c0"
             StrokeThickness="4"
+            VerticalOptions="Center"
             WidthRequest="200" />
 
         <StackLayout
@@ -66,30 +70,35 @@
 
                 <BoxView Background="#c0c0c0" WidthRequest="1" />
 
+                <ImageButton
+                    Padding="16"
+                    Aspect="AspectFit"
+                    BackgroundColor="Black"
+                    CornerRadius="28"
+                    HeightRequest="56"
+                    Source="github"
+                    VerticalOptions="Center"
+                    WidthRequest="56" />
 
                 <ImageButton
-                    Background="Black"
-                    CornerRadius="25"
-                    HeightRequest="50"
-                    Source="github_white"
+                    Padding="16"
+                    Aspect="AspectFit"
+                    BackgroundColor="#1766C2"
+                    CornerRadius="28"
+                    HeightRequest="56"
+                    Source="linkedin"
                     VerticalOptions="Center"
-                    WidthRequest="50" />
+                    WidthRequest="56" />
 
                 <ImageButton
-                    Background="#1766C2"
-                    CornerRadius="25"
-                    HeightRequest="50"
-                    Source="github_white"
+                    Padding="16"
+                    Aspect="AspectFit"
+                    BackgroundColor="#08A0E9"
+                    CornerRadius="28"
+                    HeightRequest="56"
+                    Source="twitter"
                     VerticalOptions="Center"
-                    WidthRequest="50" />
-
-                <ImageButton
-                    Background="#08A0E9"
-                    CornerRadius="25"
-                    HeightRequest="50"
-                    Source="github_white"
-                    VerticalOptions="Center"
-                    WidthRequest="50" />
+                    WidthRequest="56" />
 
             </StackLayout>
 
