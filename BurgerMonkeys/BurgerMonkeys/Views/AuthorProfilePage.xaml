@@ -76,7 +76,7 @@
                     WidthRequest="50" />
 
                 <ImageButton
-                    Background="Black"
+                    Background="#1766C2"
                     CornerRadius="25"
                     HeightRequest="50"
                     Source="github_white"
@@ -84,7 +84,7 @@
                     WidthRequest="50" />
 
                 <ImageButton
-                    Background="Black"
+                    Background="#08A0E9"
                     CornerRadius="25"
                     HeightRequest="50"
                     Source="github_white"
