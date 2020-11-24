@@ -2,7 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using BurgerMonkeys.Model;
+using BurgerMonkeys.Views;
+using Xamarin.Forms;
 
 namespace BurgerMonkeys.ViewModels
 {
@@ -17,6 +20,8 @@ namespace BurgerMonkeys.ViewModels
             set => SetProperty(ref _selectedItem, value);
         }
 
+        public ICommand SelectionChangedCommand => new Command(ExecutedSelectionChangedCommandAsync);
+
         public AuthorsViewModel()
         {
             Authors = new ObservableCollection<Author>();
@@ -24,6 +29,25 @@ namespace BurgerMonkeys.ViewModels
 
         public async override Task InitializeAsync() =>
             await GetAuthors().ConfigureAwait(false);
+
+        private async void ExecutedSelectionChangedCommandAsync()
+        {
+            await OpenPrifileAsync();
+        }
+
+        private async Task OpenPrifileAsync()
+        {
+            if (SelectedItem is null)
+                return;
+
+            await Application
+                    .Current
+                    .MainPage
+                    .Navigation
+                    .PushAsync(new AuthorProfilePage(SelectedItem))
+                    .ConfigureAwait(false);
+            SelectedItem = null;
+        }
 
         private async Task GetAuthors()
         {

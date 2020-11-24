@@ -14038,13 +14038,13 @@ namespace BurgerMonkeys.Droid
 			public const int github = 2131165295;
 			
 			// aapt resource value: 0x7F070070
-			public const int ic_mtrl_chip_checked_black = 2131165296;
+			public const int github_white = 2131165296;
 			
 			// aapt resource value: 0x7F070071
-			public const int ic_mtrl_chip_checked_circle = 2131165297;
+			public const int ic_mtrl_chip_checked_black = 2131165297;
 			
 			// aapt resource value: 0x7F070072
-			public const int ic_mtrl_chip_close_circle = 2131165298;
+			public const int ic_mtrl_chip_checked_circle = 2131165298;
 			
 			// aapt resource value: 0x7F070073
 			public const int linkedin = 2131165299;

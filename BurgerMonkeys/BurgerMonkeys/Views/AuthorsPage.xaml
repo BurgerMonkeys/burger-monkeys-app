@@ -6,56 +6,68 @@
     xmlns:bmui="clr-namespace:BurgerMonkeys.UI.Controls;assembly=BurgerMonkeys.UI"
     BackgroundColor="#f0f0f0">
     <ContentPage.Content>
-        <CollectionView Margin="16,0,16,0" ItemsSource="{Binding Authors, Mode=OneTime}">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="16" />
-            </CollectionView.ItemsLayout>
+        <CollectionView
+            ItemsSource="{Binding Authors, Mode=OneTime}"
+            SelectedItem="{Binding SelectedItem}"
+            SelectionChangedCommand="{Binding SelectionChangedCommand, Mode=OneTime}"
+            SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame
-                        Padding="16"
-                        CornerRadius="10"
-                        IsClippedToBounds="True">
-                        <Grid
-                            ColumnDefinitions="100,*,30"
-                            ColumnSpacing="8"
-                            RowDefinitions="100">
+                    <StackLayout
+                        Padding="16,8"
+                        CompressedLayout.IsHeadless="True"
+                        Spacing="0">
+                        <Frame
+                            Padding="16"
+                            CornerRadius="10"
+                            IsClippedToBounds="True">
+                            <Grid
+                                ColumnDefinitions="100,*,30"
+                                ColumnSpacing="8"
+                                RowDefinitions="100">
 
-                            <Image Source="{Binding Avatar}">
-                                <Image.Clip>
-                                    <EllipseGeometry
-                                        Center="50,50"
-                                        RadiusX="50"
-                                        RadiusY="50" />
-                                </Image.Clip>
-                            </Image>
+                                <Image Source="{Binding Avatar}">
+                                    <Image.Clip>
+                                        <EllipseGeometry
+                                            Center="50,50"
+                                            RadiusX="50"
+                                            RadiusY="50" />
+                                    </Image.Clip>
+                                </Image>
 
-                            <StackLayout
-                                Grid.Column="1"
-                                Spacing="4"
-                                VerticalOptions="Center">
-                                <Label FontAttributes="Bold" Text="{Binding Name}" />
+                                <Ellipse
+                                    HeightRequest="100"
+                                    HorizontalOptions="Start"
+                                    Stroke="#c0c0c0"
+                                    StrokeThickness="3"
+                                    WidthRequest="100" />
 
-                                <StackLayout Orientation="Horizontal" Spacing="4">
-                                    <bmui:BMImage
-                                        HeightRequest="20"
-                                        Source="github"
-                                        TintColor="Black"
-                                        WidthRequest="20" />
-                                    <Label
-                                        Text="{Binding Github}"
-                                        TextColor="#707070"
-                                        VerticalTextAlignment="Center" />
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Spacing="4"
+                                    VerticalOptions="Center">
+                                    <Label FontAttributes="Bold" Text="{Binding Name}" />
+
+                                    <StackLayout Orientation="Horizontal" Spacing="4">
+                                        <bmui:BMImage
+                                            HeightRequest="20"
+                                            Source="github"
+                                            TintColor="Black"
+                                            WidthRequest="20" />
+                                        <Label
+                                            Text="{Binding Github}"
+                                            TextColor="#707070"
+                                            VerticalTextAlignment="Center" />
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
 
-                            <bmui:BMImage
-                                Grid.Column="2"
-                                Source="chevron"
-                                TintColor="#80000000" />
-                        </Grid>
-                    </Frame>
-
+                                <bmui:BMImage
+                                    Grid.Column="2"
+                                    Source="chevron"
+                                    TintColor="#80000000" />
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
