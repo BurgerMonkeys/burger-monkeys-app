@@ -4,14 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BurgerMonkeys.Model;
+using BurgerMonkeys.Services;
 using BurgerMonkeys.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace BurgerMonkeys.ViewModels
 {
     public class AuthorsViewModel : BaseViewModel
     {
-        public ObservableCollection<Author> Authors { get; set; }
+        public ObservableRangeCollection<Author> Authors { get; set; }
+        readonly IWpService _wpService;
+        readonly IAuthorService _authorService;
 
         private Author _selectedItem;
         public Author SelectedItem
@@ -22,9 +26,12 @@ namespace BurgerMonkeys.ViewModels
 
         public ICommand SelectionChangedCommand => new Command(ExecutedSelectionChangedCommandAsync);
 
-        public AuthorsViewModel()
+        public AuthorsViewModel(IWpService wpService,
+                                IAuthorService authorService)
         {
-            Authors = new ObservableCollection<Author>();
+            _wpService = wpService;
+            Authors = new ObservableRangeCollection<Author>();
+            _authorService = authorService;
         }
 
         public async override Task InitializeAsync() =>
@@ -32,10 +39,10 @@ namespace BurgerMonkeys.ViewModels
 
         private async void ExecutedSelectionChangedCommandAsync()
         {
-            await OpenPrifileAsync();
+            await OpenProfileAsync();
         }
 
-        private async Task OpenPrifileAsync()
+        private async Task OpenProfileAsync()
         {
             if (SelectedItem is null)
                 return;
@@ -51,30 +58,16 @@ namespace BurgerMonkeys.ViewModels
 
         private async Task GetAuthors()
         {
-            if (Authors.Any())
+            var users = await _wpService.GetAuthors();
+            await _authorService.Convert(users);
+            var authors = await _authorService.Get();
+
+            if (authors is null || !authors.Any())
                 return;
 
-            await Task.Run(() =>
-            {
-                Authors.Add(new Author
-                {
-                    Avatar = "https://s.gravatar.com/avatar/96ff57841c27f46f64c7d75fe5577f00?s=100",
-                    Name = "Breno Angelotti",
-                    Github = "@BrenoAngelotti"
-                });
-                Authors.Add(new Author
-                {
-                    Avatar = "https://s.gravatar.com/avatar/32eb7d391b76a1d0773eb77ba18e34bc?s=100",
-                    Name = "Eduardo Pacheco Beraldo",
-                    Github = "@EduardoPac"
-                });
-                Authors.Add(new Author
-                {
-                    Avatar = "https://s.gravatar.com/avatar/9802e38d5bd2cd85db8b0720d5feed29?s=100",
-                    Name = "Ricardo Prestes",
-                    Github = "@ricardoprestes"
-                });
-            });
+            Authors.Clear();
+
+            Authors.AddRange(authors);
         }
     }
 }

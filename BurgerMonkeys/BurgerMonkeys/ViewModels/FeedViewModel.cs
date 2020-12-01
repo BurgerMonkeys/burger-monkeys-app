@@ -101,7 +101,7 @@ namespace BurgerMonkeys.ViewModels
         {
             EmptyMessage = "Carregando...";
             EmptyImage = "monkey.json";
-            var wpPosts = await _wpService.GetAll().ConfigureAwait(false);
+            var wpPosts = await _wpService.GetPosts().ConfigureAwait(false);
             await _postService.Convert(wpPosts).ConfigureAwait(false);
             AllItems = (await _postService.Get().ConfigureAwait(false)).ToList();
 

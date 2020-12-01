@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bmui="clr-namespace:BurgerMonkeys.UI.Controls;assembly=BurgerMonkeys.UI"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     BackgroundColor="#f0f0f0">
     <ContentPage.Content>
         <CollectionView
@@ -70,6 +71,33 @@
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Grid
+                    Padding="16"
+                    BackgroundColor="White"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="2*, *"
+                    VerticalOptions="FillAndExpand">
+
+                    <forms:AnimationView
+                        Animation="monkey.json"
+                        AutoPlay="True"
+                        HeightRequest="30"
+                        HorizontalOptions="FillAndExpand"
+                        Loop="True"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="30" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Center"
+                        Text="Carregando Autores"
+                        VerticalOptions="Start" />
+
+                </Grid>
+            </CollectionView.EmptyView>
         </CollectionView>
     </ContentPage.Content>
 </ContentPage>

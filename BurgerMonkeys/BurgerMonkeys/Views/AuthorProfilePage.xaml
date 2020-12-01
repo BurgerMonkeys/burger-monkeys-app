@@ -4,7 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    iOS:NavigationPage.HideNavigationBarSeparator="True"
     iOS:Page.LargeTitleDisplay="Never"
+    iOS:Page.UseSafeArea="True"
     Background="#f0f0f0">
     <Grid ColumnDefinitions="*,200,*" RowDefinitions="100,100,*">
         <Frame
@@ -19,7 +21,7 @@
             Grid.RowSpan="2"
             Grid.Column="1"
             HeightRequest="200"
-            Source="https://s.gravatar.com/avatar/9802e38d5bd2cd85db8b0720d5feed29?s=200"
+            Source="{Binding Author.Avatar}"
             WidthRequest="200">
             <Image.Clip>
                 <EllipseGeometry
@@ -49,19 +51,19 @@
                 FontAttributes="Bold"
                 FontSize="Title"
                 HorizontalTextAlignment="Center"
-                Text="Ricardo Prestes" />
+                Text="{Binding Author.Name}" />
 
             <Label
                 Margin="0,-8,0,0"
                 HorizontalTextAlignment="Center"
-                Text="Mobile development, .NET and C#" />
+                Text="{Binding Author.ShortInfo}" />
 
             <StackLayout
                 HorizontalOptions="Center"
                 Orientation="Horizontal"
                 Spacing="16">
                 <StackLayout>
-                    <Label HorizontalTextAlignment="Center" Text="2" />
+                    <Label HorizontalTextAlignment="Center" Text="{Binding PostCount}" />
                     <Label
                         Grid.Row="1"
                         Text="Artigos"
@@ -102,7 +104,7 @@
 
             </StackLayout>
 
-            <Label HorizontalTextAlignment="Start" Text="Bacon ipsum dolor amet buffalo andouille pork belly, pork salami jerky doner filet mignon pork loin sausage kevin ball tip. Jowl pig short ribs ball tip beef ribs. Tongue shoulder swine shankle pork. Shankle short loin ham hamburger meatloaf brisket." />
+            <Label HorizontalTextAlignment="Start" Text="{Binding Author.Bio}" />
         </StackLayout>
 
     </Grid>

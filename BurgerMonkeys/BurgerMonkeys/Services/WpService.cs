@@ -8,7 +8,8 @@ namespace BurgerMonkeys.Services
 {
     public interface IWpService
     {
-        Task<IEnumerable<Post>> GetAll();
+        Task<IEnumerable<Post>> GetPosts();
+        Task<IEnumerable<User>> GetAuthors();
     }
 
     public class WpService : IWpService
@@ -21,10 +22,16 @@ namespace BurgerMonkeys.Services
         {
         }
 
-        public async Task<IEnumerable<Post>> GetAll()
+        public async Task<IEnumerable<Post>> GetPosts()
         {
             var posts = await Client.Posts.GetAll(true);
             return posts;
+        }
+
+        public async Task<IEnumerable<User>> GetAuthors()
+        {
+            var authors = await Client.Users.GetAll();
+            return authors;
         }
     }
 }

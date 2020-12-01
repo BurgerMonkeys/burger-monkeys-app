@@ -33,7 +33,7 @@ namespace BurgerMonkeys.Test.Tests
             var listPosts = new AutoFaker<Post>().Generate(posts);
             var listCovertedPost = new AutoFaker<Model.Post>().Generate(posts);
 
-            A.CallTo(() => wpService.GetAll()).Returns(listPosts);
+            A.CallTo(() => wpService.GetPosts()).Returns(listPosts);
             A.CallTo(() => postService.Convert(listPosts)).Returns(listCovertedPost);
 
             var viewModel = new MainViewModel(postService, wpService);
@@ -48,7 +48,7 @@ namespace BurgerMonkeys.Test.Tests
         {
             var invalidListPosts = new AutoFaker<Post>().Generate(1);
 
-            A.CallTo(() => wpService.GetAll()).Returns(invalidListPosts);
+            A.CallTo(() => wpService.GetPosts()).Returns(invalidListPosts);
             A.CallTo(() => postService.Convert(invalidListPosts)).Returns(new List<Model.Post>());
             
             var viewModel = new MainViewModel(postService, wpService);
@@ -63,7 +63,7 @@ namespace BurgerMonkeys.Test.Tests
             var viewModel = new MainViewModel(postService, wpService);
             viewModel.Items.Add(new Faker<Model.Post>().Generate());
 
-            A.CallTo(() => wpService.GetAll()).MustNotHaveHappened();
+            A.CallTo(() => wpService.GetPosts()).MustNotHaveHappened();
             A.CallTo(() => postService.Convert(A.CollectionOfDummy<Post>(1))).MustNotHaveHappened();
         }
     }

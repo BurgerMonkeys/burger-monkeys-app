@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using BurgerMonkeys.Abstractions;
+using BurgerMonkeys.Services;
 using BurgerMonkeys.ViewModels;
 using Xamarin.Forms;
 
@@ -12,7 +13,9 @@ namespace BurgerMonkeys.Views
         {
             InitializeComponent();
 
-            BindingContext = new AuthorsViewModel();
+            var wpService = DependencyService.Get<IWpService>();
+            var authorService = DependencyService.Get<IAuthorService>();
+            BindingContext = new AuthorsViewModel(wpService, authorService);
         }
 
         protected async override void OnAppearing()

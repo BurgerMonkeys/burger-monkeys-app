@@ -24,6 +24,7 @@ namespace BurgerMonkeys
         void Register()
         {
             DependencyService.RegisterSingleton<IPostService>(new PostService());
+            DependencyService.RegisterSingleton<IAuthorService>(new AuthorService());
             DependencyService.RegisterSingleton<IWpService>(new WpService());
         }
 

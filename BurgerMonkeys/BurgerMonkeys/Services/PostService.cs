@@ -10,6 +10,7 @@ namespace BurgerMonkeys.Services
     public interface IPostService
     {
         Task<IEnumerable<Post>> Get();
+        Task<int> GetPostCountByAuthor(int id);
         Task<IEnumerable<Post>> GetFavorites();
         Task Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts);
         void SetFavorite(Post post);
@@ -37,7 +38,11 @@ namespace BurgerMonkeys.Services
 
                 var authors = wpPost.Embedded.Author;
                 if (authors.Any())
+                {
                     post.Author = authors.First().Name;
+                    post.AuthorId = authors.First().Id;
+                }
+                    
                 if (!(wpPost.Embedded.WpFeaturedmedia is null))
                 {
                     var media = wpPost.Embedded.WpFeaturedmedia.First();
@@ -61,7 +66,11 @@ namespace BurgerMonkeys.Services
 
         public async Task<IEnumerable<Post>> Get() => await Task.FromResult(Posts);
 
-        public async Task<IEnumerable<Post>> GetFavorites() => await Task.FromResult(Posts.Where(p => Preferences.ContainsKey(p.Id.ToString())));
+        public async Task<IEnumerable<Post>> GetFavorites() =>
+            await Task.FromResult(Posts.Where(p => Preferences.ContainsKey(p.Id.ToString())));
+
+        public async Task<int> GetPostCountByAuthor(int id) =>
+            await Task.FromResult(Posts.Count(p => p.AuthorId == id));
 
         public void SetFavorite(Post post)
         {
