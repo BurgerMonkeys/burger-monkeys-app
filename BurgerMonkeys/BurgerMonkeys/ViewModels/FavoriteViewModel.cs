@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -8,13 +6,15 @@ using BurgerMonkeys.Model;
 using BurgerMonkeys.Services;
 using BurgerMonkeys.Tools;
 using BurgerMonkeys.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace BurgerMonkeys.ViewModels
 {
-    public class FavoriteViewModel : BaseViewModel
+	public class FavoriteViewModel : BaseViewModel
     {
-        public ObservableCollection<Post> Items { get; set; }
+        public ObservableRangeCollection<Post> Items { get; }
+
         public List<Post> AllItems { get; set; }
 
         readonly IPostService _postService;
@@ -40,7 +40,7 @@ namespace BurgerMonkeys.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
-                SearchAsync();
+                Search();
             }
         }
 
@@ -51,32 +51,34 @@ namespace BurgerMonkeys.ViewModels
             set => SetProperty(ref _selectedItem, value);
         }
 
-        public ICommand UnfavoriteCommand => new Command<int>(ExecuteUnfavoriteCommand);
-        public ICommand SelectionChangedCommand => new Command(ExecuteSelectChangeCommand);
-
+        public ICommand UnfavoriteCommand { get; }
+        public ICommand SelectionChangedCommand { get; }
+        public ICommand SearchCommand { get; }
 
         public FavoriteViewModel(IPostService postService)
         {
             _postService = postService;
 
             AllItems = new List<Post>();
-            Items = new ObservableCollection<Post>();
+            Items = new ObservableRangeCollection<Post>();
+            UnfavoriteCommand = new AsyncCommand<int>(ExecuteUnfavoriteCommand);
+            SelectionChangedCommand = new AsyncCommand(ExecuteSelectChangeCommand);
         }
 
-        private async void ExecuteUnfavoriteCommand(int id)
+        private Task ExecuteUnfavoriteCommand(int id)
         {
             var post = Items.FirstOrDefault(i => i.Id == id);
             if (post is null)
-                return;
+                return Task.CompletedTask;
 
             _postService.SetFavorite(post);
-            await GetFavoritePostsAsync().ConfigureAwait(false);
+            return GetFavoritePostsAsync();
         }
 
-        private async void ExecuteSelectChangeCommand() => await OpenPostAsync();
+        private Task ExecuteSelectChangeCommand() => OpenPostAsync();
 
-        public async override Task InitializeAsync() =>
-            await GetFavoritePostsAsync().ConfigureAwait(false);
+        public override Task InitializeAsync() =>
+            GetFavoritePostsAsync();
 
         private async Task OpenPostAsync()
         {
@@ -100,7 +102,7 @@ namespace BurgerMonkeys.ViewModels
             EmptyMessage = "Nenhum post favorito encontrado";
         }
 
-        private async Task SearchAsync()
+        private void Search()
         {
             var resultItems = new List<Post>();
 
