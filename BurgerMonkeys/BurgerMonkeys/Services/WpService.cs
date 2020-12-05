@@ -24,13 +24,13 @@ namespace BurgerMonkeys.Services
 
         public async Task<IEnumerable<Post>> GetPosts()
         {
-            var posts = await Client.Posts.GetAll(true);
+            var posts = await Client.Posts.GetAll(true).ConfigureAwait(false);
             return posts;
         }
 
         public async Task<IEnumerable<User>> GetAuthors()
         {
-            var authors = await Client.Users.GetAll();
+            var authors = await Client.Users.GetAll().ConfigureAwait(false);
             return authors;
         }
     }
