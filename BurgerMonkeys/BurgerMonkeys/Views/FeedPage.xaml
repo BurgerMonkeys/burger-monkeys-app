@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<views:BasePage
     x:Class="BurgerMonkeys.Views.FeedPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,6 +7,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:views="clr-namespace:BurgerMonkeys.Views"
     xmlns:vm="clr-namespace:BurgerMonkeys.ViewModels"
     iOS:NavigationPage.PrefersLargeTitles="True"
     iOS:Page.UseSafeArea="True"
@@ -157,4 +158,4 @@
             </CollectionView>
         </RefreshView>
     </StackLayout>
-</ContentPage>
+</views:BasePage>

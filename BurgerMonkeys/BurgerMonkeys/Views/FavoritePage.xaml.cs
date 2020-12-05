@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace BurgerMonkeys.Views
 {
-    public partial class FavoritePage : ContentPage
+    public partial class FavoritePage
     {
         public FavoritePage()
         {
@@ -14,18 +14,6 @@ namespace BurgerMonkeys.Views
 
             var postService = DependencyService.Get<IPostService>();
             BindingContext = new FavoriteViewModel(postService);
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await OnAppearingAsync();
-        }
-
-        async Task OnAppearingAsync()
-        {
-            if (BindingContext is IInitialize viewModel)
-                await viewModel.InitializeAsync().ConfigureAwait(false);
         }
     }
 }

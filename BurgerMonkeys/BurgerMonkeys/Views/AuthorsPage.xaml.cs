@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace BurgerMonkeys.Views
 {
-    public partial class AuthorsPage : ContentPage
+    public partial class AuthorsPage
     {
         public AuthorsPage()
         {
@@ -16,18 +16,6 @@ namespace BurgerMonkeys.Views
             var wpService = DependencyService.Get<IWpService>();
             var authorService = DependencyService.Get<IAuthorService>();
             BindingContext = new AuthorsViewModel(wpService, authorService);
-        }
-
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            await OnAppearingAsync();
-        }
-
-        private async Task OnAppearingAsync()
-        {
-            if (BindingContext is IInitialize viewModel)
-                await viewModel.InitializeAsync();
         }
     }
 }

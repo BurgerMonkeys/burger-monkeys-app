@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage
+<views:BasePage
     x:Class="BurgerMonkeys.Views.FavoritePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:BurgerMonkeys.Converters"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:views="clr-namespace:BurgerMonkeys.Views"
     xmlns:vm="clr-namespace:BurgerMonkeys.ViewModels">
     <StackLayout Spacing="0">
 
@@ -143,4 +144,4 @@
             </CollectionView>
         </RefreshView>
     </StackLayout>
-</ContentPage>
+</views:BasePage>
