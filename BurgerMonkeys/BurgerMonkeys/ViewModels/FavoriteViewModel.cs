@@ -94,10 +94,7 @@ namespace BurgerMonkeys.ViewModels
             AllItems = (await _postService.GetFavorites().ConfigureAwait(false)).ToList();
 
             Items.Clear();
-            foreach (var item in AllItems)
-            {
-                Items.Add(item);
-            }
+            Items.AddRange(AllItems);
             IsBusy = false;
             EmptyMessage = "Nenhum post favorito encontrado";
         }
@@ -109,7 +106,7 @@ namespace BurgerMonkeys.ViewModels
             if (SearchText.IsNullOrWhiteSpace())
             {
                 Items.Clear();
-                AllItems.ForEach(i => Items.Add(i));
+                Items.AddRange(AllItems);
                 return;
             }
 
@@ -122,7 +119,7 @@ namespace BurgerMonkeys.ViewModels
                     .Contains(cleanSearchText)
                 ).ToList();
             Items.Clear();
-            resultItems.ForEach(i => Items.Add(i));
+            Items.AddRange(resultItems);
         }
     }
 }

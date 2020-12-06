@@ -56,7 +56,7 @@ namespace BurgerMonkeys.ViewModels
         private async Task GetAuthors()
         {
             var users = await _wpService.GetAuthors();
-            await _authorService.Convert(users);
+            _authorService.Convert(users);
             var authors = await _authorService.Get();
 
             if (authors is null || !authors.Any())
