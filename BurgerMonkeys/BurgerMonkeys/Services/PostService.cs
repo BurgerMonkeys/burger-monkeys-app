@@ -39,8 +39,9 @@ namespace BurgerMonkeys.Services
                 var authors = wpPost.Embedded.Author;
                 if (authors.Any())
                 {
-                    post.Author = authors.First().Name;
-                    post.AuthorId = authors.First().Id;
+                    var firstAuthor = authors.First();
+                    post.Author = firstAuthor.Name;
+                    post.AuthorId = firstAuthor.Id;
                 }
                     
                 if (wpPost.Embedded.WpFeaturedmedia is { })
