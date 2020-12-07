@@ -12,7 +12,7 @@ namespace BurgerMonkeys
             InitializeComponent();
 
             Register();
-
+            Xamarin.Forms.Device.SetFlags(new string[] { "Shapes_Experimental", "SwipeView_Experimental" });
             var navigation = new Xamarin.Forms.NavigationPage(new MainPage());
             navigation.On<iOS>().SetPrefersLargeTitles(true);
             navigation.BarBackgroundColor = Color.FromHex("#f0f0f0");

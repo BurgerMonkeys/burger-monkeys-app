@@ -8,13 +8,14 @@ using BurgerMonkeys.Model;
 using BurgerMonkeys.Services;
 using BurgerMonkeys.Tools;
 using BurgerMonkeys.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace BurgerMonkeys.ViewModels
 {
     public class FeedViewModel : BaseViewModel
     {
-        public ObservableCollection<Post> Items { get; set; }
+        public ObservableRangeCollection<Post> Items { get; }
         public List<Post> AllItems { get; set; }
 
         readonly IPostService _postService;
@@ -41,7 +42,7 @@ namespace BurgerMonkeys.ViewModels
             set
             {
                 SetProperty(ref _searchText, value);
-                SearchAsync();
+                Search();
             }
         }
 
@@ -52,40 +53,36 @@ namespace BurgerMonkeys.ViewModels
             set => SetProperty(ref _selectedItem, value);
         }
 
-
         public ICommand RefreshCommand { get; }
 
         public ICommand SearchCommand { get; }
 
-        public ICommand SelectionChangedCommand => new Command(ExecutedSelectionChangedCommand);
+        public ICommand SelectionChangedCommand { get; }
 
-        public ICommand FavoriteCommand => new Command<int>(ExecutedFavoriteCommand);
+        public ICommand FavoriteCommand { get; }
 
         public FeedViewModel(IPostService postService,
                              IWpService wpService)
         {
             _postService = postService;
             _wpService = wpService;
-            Items = new ObservableCollection<Post>();
-            RefreshCommand = new Command(ExecuteRefreshCommand);
+            Items = new ObservableRangeCollection<Post>();
+            RefreshCommand = new AsyncCommand(ExecuteRefreshCommand);
             SearchCommand = new Command(ExecuteSearchCommand);
+            SelectionChangedCommand = new AsyncCommand(ExecutedSelectionChangedCommand);
+            FavoriteCommand = new Command<int>(ExecutedFavoriteCommand);
         }
 
-        private async void ExecuteRefreshCommand()
-        {
-            await GetPostsAsync();
-        }
+		private Task ExecuteRefreshCommand() => GetPostsAsync();
 
-        private async void ExecutedSelectionChangedCommand()
-        {
-            await OpenPostAsync();
-        }
+		private Task ExecutedSelectionChangedCommand() => OpenPostAsync();
 
-        public async override Task InitializeAsync()
+		public override Task InitializeAsync()
         {
             if (Items.Any())
-                return;
-            await GetPostsAsync().ConfigureAwait(false);
+                return Task.CompletedTask;
+
+            return GetPostsAsync();
         }
 
         private async Task OpenPostAsync()
@@ -106,28 +103,22 @@ namespace BurgerMonkeys.ViewModels
             AllItems = (await _postService.Get().ConfigureAwait(false)).ToList();
 
             Items.Clear();
-            foreach (var item in AllItems)
-            {
-                Items.Add(item);
-            }
+            Items.AddRange(AllItems);
             IsBusy = false;
             EmptyMessage = "Nenhum post encontrado";
             EmptyImage = "empty.json";
         }
 
-        private async void ExecuteSearchCommand()
-        {
-            await SearchAsync();
-        }
+		private void ExecuteSearchCommand() => Search();
 
-        private async Task SearchAsync()
+		private void Search()
         {
             var resultItems = new List<Post>();
 
             if (SearchText.IsNullOrWhiteSpace())
             {
                 Items.Clear();
-                AllItems.ForEach(i => Items.Add(i));
+                Items.AddRange(AllItems);
                 return;
             }
 
@@ -140,7 +131,7 @@ namespace BurgerMonkeys.ViewModels
                     .Contains(cleanSearchText)
                 ).ToList();
             Items.Clear();
-            resultItems.ForEach(i => Items.Add(i));
+            Items.AddRange(resultItems);
         }
 
         private void ExecutedFavoriteCommand(int id)

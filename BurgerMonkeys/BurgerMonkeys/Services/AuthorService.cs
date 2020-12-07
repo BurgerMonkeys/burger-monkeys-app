@@ -7,7 +7,7 @@ namespace BurgerMonkeys.Services
 {
     public interface IAuthorService
     {
-        Task Convert(IEnumerable<WordPressPCL.Models.User> users);
+        void Convert(IEnumerable<WordPressPCL.Models.User> users);
         Task<List<Author>> Get();
     }
 
@@ -15,7 +15,7 @@ namespace BurgerMonkeys.Services
     {
         List<Author> Authors = new List<Author>();
 
-        public async Task Convert(IEnumerable<WordPressPCL.Models.User> users)
+        public void Convert(IEnumerable<WordPressPCL.Models.User> users)
         {
             var authors = new List<Author>();
 
@@ -36,9 +36,6 @@ namespace BurgerMonkeys.Services
             Authors = authors;
         }
 
-        public async Task<List<Author>> Get()
-        {
-            return Authors;
-        }
-    }
+		public Task<List<Author>> Get() => Task.FromResult(Authors);
+	}
 }

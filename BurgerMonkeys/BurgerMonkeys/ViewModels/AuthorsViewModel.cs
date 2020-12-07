@@ -24,7 +24,7 @@ namespace BurgerMonkeys.ViewModels
             set => SetProperty(ref _selectedItem, value);
         }
 
-        public ICommand SelectionChangedCommand => new Command(ExecutedSelectionChangedCommandAsync);
+        public ICommand SelectionChangedCommand => new AsyncCommand(ExecutedSelectionChangedCommandAsync);
 
         public AuthorsViewModel(IWpService wpService,
                                 IAuthorService authorService)
@@ -37,12 +37,9 @@ namespace BurgerMonkeys.ViewModels
         public async override Task InitializeAsync() =>
             await GetAuthors().ConfigureAwait(false);
 
-        private async void ExecutedSelectionChangedCommandAsync()
-        {
-            await OpenProfileAsync();
-        }
+		private Task ExecutedSelectionChangedCommandAsync() => OpenProfileAsync();
 
-        private async Task OpenProfileAsync()
+		private async Task OpenProfileAsync()
         {
             if (SelectedItem is null)
                 return;
@@ -59,7 +56,7 @@ namespace BurgerMonkeys.ViewModels
         private async Task GetAuthors()
         {
             var users = await _wpService.GetAuthors();
-            await _authorService.Convert(users);
+            _authorService.Convert(users);
             var authors = await _authorService.Get();
 
             if (authors is null || !authors.Any())
