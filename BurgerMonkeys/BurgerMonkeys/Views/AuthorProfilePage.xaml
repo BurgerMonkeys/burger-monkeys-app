@@ -69,6 +69,10 @@
                         Grid.Row="1"
                         Text="Artigos"
                         TextColor="#707070" />
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenPostsCommand}" NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
 
                 <BoxView Background="#c0c0c0" WidthRequest="1" />

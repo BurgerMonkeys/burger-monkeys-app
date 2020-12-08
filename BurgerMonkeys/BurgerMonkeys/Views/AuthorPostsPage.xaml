@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:BasePage
+    x:Class="BurgerMonkeys.Views.AuthorPostsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:BurgerMonkeys.Converters"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:views="clr-namespace:BurgerMonkeys.Views"
+    xmlns:vm="clr-namespace:BurgerMonkeys.ViewModels"
+    Title="{Binding Title}"
+    iOS:Page.UseSafeArea="True">
+    <CollectionView
+        ItemsSource="{Binding Items}"
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+        SelectionChangedCommand="{Binding SelectionChangedCommand, Mode=OneTime}"
+        SelectionMode="Single">
+        <CollectionView.EmptyView>
+            <Grid
+                Padding="16"
+                BackgroundColor="White"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="2*, *"
+                VerticalOptions="FillAndExpand">
+
+                <forms:AnimationView
+                    Animation="{Binding EmptyImage}"
+                    AutoPlay="True"
+                    HeightRequest="30"
+                    HorizontalOptions="FillAndExpand"
+                    Loop="True"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="30" />
+
+                <Label
+                    Grid.Row="1"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding EmptyMessage}"
+                    VerticalOptions="Start" />
+
+            </Grid>
+        </CollectionView.EmptyView>
+
+        <CollectionView.Header />
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItems>
+                            <SwipeItem
+                                BackgroundColor="#007aff"
+                                Command="{Binding Path=FavoriteCommand, Source={RelativeSource AncestorType={x:Type vm:AuthorPostsViewModel}}}"
+                                CommandParameter="{Binding Id}"
+                                IconImageSource="star"
+                                IsVisible="{Binding Favorite, Converter={converters:InverseBoolConverter}}"
+                                Text="Favoritar" />
+
+                            <SwipeItem
+                                BackgroundColor="#ff3b30"
+                                Command="{Binding Path=FavoriteCommand, Source={RelativeSource AncestorType={x:Type vm:AuthorPostsViewModel}}}"
+                                CommandParameter="{Binding Id}"
+                                IconImageSource="star_outline"
+                                IsVisible="{Binding Favorite}"
+                                Text="Desfavoritar" />
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <StackLayout Spacing="0">
+
+                        <Grid
+                            BackgroundColor="White"
+                            ColumnSpacing="10"
+                            RowSpacing="{OnPlatform Android=0,
+                                                    iOS=5}">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="28" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <ffimageloading:CachedImage
+                                Grid.RowSpan="3"
+                                Aspect="AspectFill"
+                                DownsampleToViewSize="true"
+                                ErrorPlaceholder="bm_pattern"
+                                LoadingPlaceholder="bm_pattern"
+                                Source="{Binding Thumbnail}" />
+
+                            <Label
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Margin="0,8,8,0"
+                                FontAttributes="Bold"
+                                Text="{Binding Author}"
+                                TextColor="#0B5A9D"
+                                VerticalTextAlignment="Center" />
+
+                            <Path
+                                Grid.Column="2"
+                                Margin="0,0,8,0"
+                                Aspect="Uniform"
+                                Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                                Fill="#fbc02b"
+                                HeightRequest="24"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding Favorite}"
+                                VerticalOptions="Center"
+                                WidthRequest="24" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Margin="0,0,8,0"
+                                FontSize="Large"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="3"
+                                Text="{Binding Title}"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                Margin="0,0,8,8"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding Date, StringFormat='{0:d}'}"
+                                TextColor="#707070"
+                                VerticalTextAlignment="Center" />
+
+                        </Grid>
+                        <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
+                    </StackLayout>
+                </SwipeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</views:BasePage>

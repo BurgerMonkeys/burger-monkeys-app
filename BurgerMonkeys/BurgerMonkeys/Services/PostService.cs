@@ -10,7 +10,7 @@ namespace BurgerMonkeys.Services
     public interface IPostService
     {
         Task<IEnumerable<Post>> Get();
-        Task<int> GetPostCountByAuthor(int id);
+        Task<IEnumerable<Post>> GetPostCountByAuthor(int id);
         Task<IEnumerable<Post>> GetFavorites();
         Task Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts);
         void SetFavorite(Post post);
@@ -70,8 +70,8 @@ namespace BurgerMonkeys.Services
         public Task<IEnumerable<Post>> GetFavorites() =>
             Task.FromResult(Posts.Where(p => Preferences.ContainsKey(p.Id.ToString())));
 
-        public Task<int> GetPostCountByAuthor(int id) =>
-            Task.FromResult(Posts.Count(p => p.AuthorId == id));
+        public Task<IEnumerable<Post>> GetPostCountByAuthor(int id) =>
+            Task.FromResult(Posts.Where(p => p.AuthorId == id));
 
         public void SetFavorite(Post post)
         {
