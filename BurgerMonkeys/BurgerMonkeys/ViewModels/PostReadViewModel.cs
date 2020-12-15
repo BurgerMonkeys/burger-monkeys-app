@@ -48,6 +48,7 @@ namespace BurgerMonkeys.ViewModels
         {
             _postService = postService;
             _post = post;
+            _post.Favorite = Preferences.ContainsKey(post.Id.ToString());
             PostTitle = _post.Title;
 
             SetFavoriteText();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BurgerMonkeys.Model;
+using BurgerMonkeys.Repositories;
 using Xamarin.Essentials;
 
 namespace BurgerMonkeys.Services
@@ -12,15 +13,21 @@ namespace BurgerMonkeys.Services
         Task<IEnumerable<Post>> Get();
         Task<IEnumerable<Post>> GetPostCountByAuthor(int id);
         Task<IEnumerable<Post>> GetFavorites();
-        Task Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts);
+        Task<List<Post>> Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts);
         void SetFavorite(Post post);
+        Task<bool> Save(List<Post> posts);
     }
 
     public class PostService : IPostService
     {
-        static List<Post> Posts = new List<Post>();
- 
-        public Task Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts)
+        readonly IPostRepository _postRepository;
+
+        public PostService(IPostRepository postRepository)
+        {
+            _postRepository = postRepository;
+        }
+
+        public async Task<List<Post>> Convert(IEnumerable<WordPressPCL.Models.Post> wpPosts)
         {
             var posts = new List<Post>();
             foreach (var wpPost in wpPosts)
@@ -61,17 +68,34 @@ namespace BurgerMonkeys.Services
                 }
                 posts.Add(post);
             }
-            Posts = posts;
-            return Task.CompletedTask;
+            return await Task.FromResult(posts);
         }
 
-        public Task<IEnumerable<Post>> Get() => Task.FromResult<IEnumerable<Post>>(Posts);
+        public async Task<IEnumerable<Post>> Get()
+        {
+            return await Task.FromResult(_postRepository.Get().OrderByDescending(p => p.Date));
+        }
 
-        public Task<IEnumerable<Post>> GetFavorites() =>
-            Task.FromResult(Posts.Where(p => Preferences.ContainsKey(p.Id.ToString())));
+        public Task<IEnumerable<Post>> GetFavorites()
+        {
+            var posts = _postRepository.Get();
 
-        public Task<IEnumerable<Post>> GetPostCountByAuthor(int id) =>
-            Task.FromResult(Posts.Where(p => p.AuthorId == id));
+            return Task.FromResult(posts.Where(p => Preferences.ContainsKey(p.Id.ToString())));
+        }
+
+        public async Task<IEnumerable<Post>> GetPostCountByAuthor(int id)
+        {
+            return await Task.FromResult(_postRepository.GetPostCountByAuthor(id).OrderByDescending(p => p.Date));
+        }
+
+        public async Task<bool> Save(List<Post> posts)
+        {
+            return await Task.Run(() =>
+            {
+                var savedCount = _postRepository.Save(posts);
+                return savedCount == posts.Count;
+            });
+        }
 
         public void SetFavorite(Post post)
         {

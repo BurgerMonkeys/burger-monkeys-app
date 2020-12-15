@@ -18,6 +18,8 @@ namespace BurgerMonkeys.ViewModels
         public ObservableRangeCollection<Post> Items { get; }
         public List<Post> AllItems { get; set; }
 
+        bool _loaded;
+
         readonly IPostService _postService;
         readonly IWpService _wpService;
 
@@ -77,12 +79,16 @@ namespace BurgerMonkeys.ViewModels
 
 		private Task ExecutedSelectionChangedCommand() => OpenPostAsync();
 
-		public override Task InitializeAsync()
+		public async override Task InitializeAsync()
         {
             if (Items.Any())
-                return Task.CompletedTask;
+                return;
 
-            return GetPostsAsync();
+            await GetPostsAsync();
+
+            if (!_loaded)
+                await DownloadPosts();
+            
         }
 
         private async Task OpenPostAsync()
@@ -96,20 +102,38 @@ namespace BurgerMonkeys.ViewModels
 
         private async Task GetPostsAsync()
         {
-            EmptyMessage = "Carregando...";
-            EmptyImage = "monkey.json";
-            var wpPosts = await _wpService.GetPosts().ConfigureAwait(false);
-            await _postService.Convert(wpPosts).ConfigureAwait(false);
-            AllItems = (await _postService.Get().ConfigureAwait(false)).ToList();
+            var posts = (await _postService.Get().ConfigureAwait(false)).ToList();
+
+            if (posts is null && !posts.Any())
+                return;
+
+            AllItems = posts;
 
             Items.Clear();
             Items.AddRange(AllItems);
+
             IsBusy = false;
             EmptyMessage = "Nenhum post encontrado";
             EmptyImage = "empty.json";
         }
 
-		private void ExecuteSearchCommand() => Search();
+        private async Task DownloadPosts()
+        {
+            EmptyMessage = "Carregando...";
+            EmptyImage = "monkey.json";
+
+            var wpPosts = await _wpService.GetPosts().ConfigureAwait(false);
+            var posts = await _postService.Convert(wpPosts).ConfigureAwait(false);
+            var save = await _postService.Save(posts);
+
+            if (save)
+            {
+                await GetPostsAsync();
+                _loaded = true;
+            }
+        }
+
+        private void ExecuteSearchCommand() => Search();
 
 		private void Search()
         {

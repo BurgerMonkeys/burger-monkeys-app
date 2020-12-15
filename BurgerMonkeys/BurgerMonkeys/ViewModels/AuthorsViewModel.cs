@@ -17,6 +17,8 @@ namespace BurgerMonkeys.ViewModels
         readonly IWpService _wpService;
         readonly IAuthorService _authorService;
 
+        bool loaded;
+
         private Author _selectedItem;
         public Author SelectedItem
         {
@@ -34,10 +36,28 @@ namespace BurgerMonkeys.ViewModels
             _authorService = authorService;
         }
 
-        public async override Task InitializeAsync() =>
+        public async override Task InitializeAsync()
+        {
             await GetAuthors().ConfigureAwait(false);
 
-		private Task ExecutedSelectionChangedCommandAsync() => OpenProfileAsync();
+            if (!loaded)
+                await DownloadAuthors();
+        }
+
+        private async Task DownloadAuthors()
+        {
+            var users = await _wpService.GetAuthors();
+            var authorsSave = await _authorService.Convert(users);
+            var saved = await _authorService.Save(authorsSave);
+
+            if (saved)
+            {
+                await GetAuthors();
+                loaded = true;
+            }
+        }
+
+        private Task ExecutedSelectionChangedCommandAsync() => OpenProfileAsync();
 
 		private async Task OpenProfileAsync()
         {
@@ -55,8 +75,6 @@ namespace BurgerMonkeys.ViewModels
 
         private async Task GetAuthors()
         {
-            var users = await _wpService.GetAuthors();
-            _authorService.Convert(users);
             var authors = await _authorService.Get();
 
             if (authors is null || !authors.Any())

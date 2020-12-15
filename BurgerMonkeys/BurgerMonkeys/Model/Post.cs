@@ -1,4 +1,6 @@
 ﻿using System;
+using LiteDB;
+
 namespace BurgerMonkeys.Model
 {
     public class Post : BaseEntity
@@ -12,7 +14,9 @@ namespace BurgerMonkeys.Model
         public string Slug { get; set; }
         public string Author { get; set; }
         public int AuthorId { get; set; }
+       
         private bool _favorite;
+        [BsonIgnore]
         public bool Favorite
         {
             get => _favorite;
