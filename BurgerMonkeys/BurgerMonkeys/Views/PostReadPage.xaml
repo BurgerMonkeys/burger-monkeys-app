@@ -8,6 +8,7 @@
     iOS:Page.LargeTitleDisplay="Never">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding ShareCommand}" IconImageSource="share" />
         <ToolbarItem Command="{Binding FavoriteCommand}" IconImageSource="{Binding FavoriteIcon}" />
     </ContentPage.ToolbarItems>
 

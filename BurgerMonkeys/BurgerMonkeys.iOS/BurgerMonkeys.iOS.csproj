@@ -139,6 +139,10 @@
     <ImageAsset Include="Assets.xcassets\github_white.imageset\github %281%29.png" />
     <ImageAsset Include="Assets.xcassets\github_white.imageset\github %282%29.png" />
     <ImageAsset Include="Assets.xcassets\github_white.imageset\github.png" />
+    <ImageAsset Include="Assets.xcassets\share.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\share.imageset\export-variant.png" />
+    <ImageAsset Include="Assets.xcassets\share.imageset\export-variant%281%29.png" />
+    <ImageAsset Include="Assets.xcassets\share.imageset\export-variant%282%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -192,5 +196,6 @@
     <Folder Include="Assets.xcassets\twitter.imageset\" />
     <Folder Include="Assets.xcassets\github_white.imageset\" />
     <Folder Include="Helper\" />
+    <Folder Include="Assets.xcassets\share.imageset\" />
   </ItemGroup>
 </Project>

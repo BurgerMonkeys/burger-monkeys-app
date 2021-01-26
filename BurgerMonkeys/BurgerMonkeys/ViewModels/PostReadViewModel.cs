@@ -41,7 +41,8 @@ namespace BurgerMonkeys.ViewModels
             set => SetProperty(ref _body, value);
         }
 
-        public ICommand FavoriteCommand => new Command(ExecutedFavoriteCommand);
+        public ICommand FavoriteCommand { get; set; }
+        public ICommand ShareCommand { get; set; }
 
         public PostReadViewModel(IPostService postService,
                                  Post post)
@@ -51,10 +52,15 @@ namespace BurgerMonkeys.ViewModels
             _post.Favorite = Preferences.ContainsKey(post.Id.ToString());
             PostTitle = _post.Title;
 
+            FavoriteCommand = new Command(ExecutedFavoriteCommand);
+            ShareCommand = new Command(ExecuteShareCommand);
+
             SetFavoriteText();
             SetFavoriteIcon();
             LoadPost();
         }
+
+        
 
         private void LoadPost()
         {
@@ -87,10 +93,19 @@ namespace BurgerMonkeys.ViewModels
 
         private void ExecutedFavoriteCommand()
         {
-            //SetFavorite();
             _postService.SetFavorite(_post);
             SetFavoriteText();
             SetFavoriteIcon();
+        }
+
+        private async void ExecuteShareCommand() 
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = _post.Url,
+                Title = _post.Title,
+                Text = "Veja este post na BurgerMonkeys"
+            });
         }
 
         private void SetFavorite()

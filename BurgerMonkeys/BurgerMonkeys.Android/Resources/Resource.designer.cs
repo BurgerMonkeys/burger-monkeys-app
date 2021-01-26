@@ -16794,19 +16794,22 @@ namespace BurgerMonkeys.Droid
 			public const int script_text = 2131165316;
 			
 			// aapt resource value: 0x7F070085
-			public const int star = 2131165317;
+			public const int share = 2131165317;
 			
 			// aapt resource value: 0x7F070086
-			public const int star_outline = 2131165318;
+			public const int star = 2131165318;
 			
 			// aapt resource value: 0x7F070087
-			public const int tooltip_frame_dark = 2131165319;
+			public const int star_outline = 2131165319;
 			
 			// aapt resource value: 0x7F070088
-			public const int tooltip_frame_light = 2131165320;
+			public const int tooltip_frame_dark = 2131165320;
 			
 			// aapt resource value: 0x7F070089
-			public const int twitter = 2131165321;
+			public const int tooltip_frame_light = 2131165321;
+			
+			// aapt resource value: 0x7F07008A
+			public const int twitter = 2131165322;
 			
 			static Drawable()
 			{
