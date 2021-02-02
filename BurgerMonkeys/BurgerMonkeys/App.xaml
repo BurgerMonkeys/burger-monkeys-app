@@ -1,5 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BurgerMonkeys.App">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="BurgerMonkeys.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
+        <Color x:Key="DarkListColor">#1c1c1e</Color>
+        <Color x:Key="LightListColor">white</Color>
+        <Color x:Key="DarkBackgroundColor">black</Color>
+        <Color x:Key="LightBackgroundColor">#f2f2f7</Color>
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackgroundColor}, Light={StaticResource LightBackgroundColor}}" />
+            <Setter Property="BarTextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+        </Style>
+
+        <Style TargetType="CollectionView">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackgroundColor}, Light={StaticResource LightBackgroundColor}}" />
+        </Style>
+
+        <Style x:Key="ListFrame" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkListColor}, Light={StaticResource LightListColor}}" />
+        </Style>
+
+        <Style x:Key="ListGrid" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkListColor}, Light={StaticResource LightListColor}}" />
+        </Style>
+
+        <Style x:Key="PostTitle" TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="MaxLines" Value="3" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
     </Application.Resources>
 </Application>

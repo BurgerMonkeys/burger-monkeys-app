@@ -9,8 +9,7 @@
     Title="BurgerMonkeys"
     android:TabbedPage.ToolbarPlacement="Bottom"
     iOS:NavigationPage.PrefersLargeTitles="True"
-    iOS:Page.UseSafeArea="True"
-    BackgroundColor="#f0f0f0">
+    iOS:Page.UseSafeArea="True">
 
     <pages:FeedPage Title="Feed" IconImageSource="feed" />
     <pages:FavoritePage Title="Favoritos" IconImageSource="favorite_folder" />

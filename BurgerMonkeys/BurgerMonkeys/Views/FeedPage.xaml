@@ -9,9 +9,10 @@
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:views="clr-namespace:BurgerMonkeys.Views"
     xmlns:vm="clr-namespace:BurgerMonkeys.ViewModels"
+    Title="Feed"
+    iOS:NavigationPage.HideNavigationBarSeparator="True"
     iOS:NavigationPage.PrefersLargeTitles="True"
-    iOS:Page.UseSafeArea="True"
-    BackgroundColor="#f0f0f0">
+    iOS:Page.UseSafeArea="True">
 
     <StackLayout Spacing="0">
 
@@ -29,7 +30,6 @@
                 <CollectionView.EmptyView>
                     <Grid
                         Padding="16"
-                        BackgroundColor="White"
                         HorizontalOptions="FillAndExpand"
                         RowDefinitions="2*, *"
                         VerticalOptions="FillAndExpand">
@@ -80,10 +80,10 @@
                             <StackLayout Spacing="0">
 
                                 <Grid
-                                    BackgroundColor="White"
                                     ColumnSpacing="10"
                                     RowSpacing="{OnPlatform Android=0,
-                                                            iOS=5}">
+                                                            iOS=5}"
+                                    Style="{StaticResource ListGrid}">
 
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="150" />
@@ -130,13 +130,8 @@
                                         Grid.Row="1"
                                         Grid.Column="1"
                                         Grid.ColumnSpan="2"
-                                        Margin="0,0,8,0"
-                                        FontSize="Large"
-                                        LineBreakMode="TailTruncation"
-                                        MaxLines="3"
-                                        Text="{Binding Title}"
-                                        TextColor="Black"
-                                        VerticalTextAlignment="Center" />
+                                        Style="{StaticResource PostTitle}"
+                                        Text="{Binding Title}" />
 
                                     <Label
                                         Grid.Row="2"
@@ -149,7 +144,7 @@
                                         VerticalTextAlignment="Center" />
 
                                 </Grid>
-                                <BoxView BackgroundColor="#e2e2e2" HeightRequest="1" />
+                                <BoxView HeightRequest="1" />
                             </StackLayout>
                         </SwipeView>
 

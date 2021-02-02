@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bmui="clr-namespace:BurgerMonkeys.UI.Controls;assembly=BurgerMonkeys.UI"
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-    xmlns:views="clr-namespace:BurgerMonkeys.Views"
-    BackgroundColor="#f0f0f0">
+    xmlns:views="clr-namespace:BurgerMonkeys.Views">
     <ContentPage.Content>
         <CollectionView
             ItemsSource="{Binding Authors, Mode=OneTime}"
@@ -22,7 +21,8 @@
                         <Frame
                             Padding="16"
                             CornerRadius="10"
-                            IsClippedToBounds="True">
+                            IsClippedToBounds="True"
+                            Style="{StaticResource ListFrame}">
                             <Grid
                                 ColumnDefinitions="100,*,30"
                                 ColumnSpacing="8"
@@ -48,13 +48,18 @@
                                     Grid.Column="1"
                                     Spacing="4"
                                     VerticalOptions="Center">
-                                    <Label FontAttributes="Bold" Text="{Binding Name}" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="Medium"
+                                        Style="{StaticResource PostTitle}"
+                                        Text="{Binding Name}" />
 
                                     <StackLayout Orientation="Horizontal" Spacing="4">
                                         <bmui:BMImage
                                             HeightRequest="20"
                                             Source="github"
-                                            TintColor="Black"
+                                            TintColor="{AppThemeBinding Dark=White,
+                                                                        Light=Black}"
                                             WidthRequest="20" />
                                         <Label
                                             Text="{Binding Github}"
@@ -66,7 +71,8 @@
                                 <bmui:BMImage
                                     Grid.Column="2"
                                     Source="chevron"
-                                    TintColor="#80000000" />
+                                    TintColor="{AppThemeBinding Dark=White,
+                                                                Light=Black}" />
                             </Grid>
                         </Frame>
                     </StackLayout>
@@ -76,7 +82,6 @@
             <CollectionView.EmptyView>
                 <Grid
                     Padding="16"
-                    BackgroundColor="White"
                     HorizontalOptions="FillAndExpand"
                     RowDefinitions="2*, *"
                     VerticalOptions="FillAndExpand">

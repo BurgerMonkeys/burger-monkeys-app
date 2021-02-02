@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BurgerMonkeys.Abstractions;
-using BurgerMonkeys.Services;
+﻿using BurgerMonkeys.Services;
 using BurgerMonkeys.ViewModels;
 using Xamarin.Forms;
 
