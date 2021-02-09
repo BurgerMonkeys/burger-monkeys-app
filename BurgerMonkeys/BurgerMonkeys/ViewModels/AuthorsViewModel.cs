@@ -41,18 +41,18 @@ namespace BurgerMonkeys.ViewModels
             await GetAuthors().ConfigureAwait(false);
 
             if (!loaded)
-                await DownloadAuthors();
+                await DownloadAuthors().ConfigureAwait(false);
         }
 
         private async Task DownloadAuthors()
         {
-            var users = await _wpService.GetAuthors();
-            var authorsSave = await _authorService.Convert(users);
-            var saved = await _authorService.Save(authorsSave);
+            var users = await _wpService.GetAuthors().ConfigureAwait(false);
+            var authorsSave = await _authorService.Convert(users).ConfigureAwait(false);
+            var saved = await _authorService.Save(authorsSave).ConfigureAwait(false);
 
             if (saved)
             {
-                await GetAuthors();
+                await GetAuthors().ConfigureAwait(false);
                 loaded = true;
             }
         }

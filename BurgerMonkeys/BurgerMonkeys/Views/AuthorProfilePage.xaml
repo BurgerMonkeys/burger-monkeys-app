@@ -8,13 +8,15 @@
     iOS:NavigationPage.HideNavigationBarSeparator="True"
     iOS:Page.LargeTitleDisplay="Never"
     iOS:Page.UseSafeArea="True"
-    Background="#f0f0f0">
-    <Grid ColumnDefinitions="*,200,*" RowDefinitions="100,100,*">
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackgroundColor}, Light={StaticResource LightBackgroundColor}}">
+    <Grid
+        ColumnDefinitions="*,200,*"
+        RowDefinitions="100,100,*">
         <Frame
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.ColumnSpan="3"
-            Background="White"
+            Style="{StaticResource ListFrame}"
             CornerRadius="32"
             HasShadow="False" />
 

@@ -64,7 +64,7 @@ namespace BurgerMonkeys.ViewModels
 
         private void LoadPost()
         {
-            var cssFile = "leitor.css";
+            var cssFile = App.Current.RequestedTheme == OSAppTheme.Light ? "leitor.css" : "leitor-dark.css";
 
             var sb = new StringBuilder();
 

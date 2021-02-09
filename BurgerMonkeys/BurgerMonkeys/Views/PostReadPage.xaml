@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     Title="Ler Post"
-    iOS:Page.LargeTitleDisplay="Never">
+    iOS:Page.LargeTitleDisplay="Never"
+    BackgroundColor="{AppThemeBinding Dark={StaticResource DarkBackgroundColor}, Light={StaticResource LightBackgroundColor}}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding ShareCommand}" IconImageSource="share" />
@@ -16,6 +17,6 @@
         <WebView
             HorizontalOptions="FillAndExpand"
             Source="{Binding Body}"
-            VerticalOptions="FillAndExpand" />
+            VerticalOptions="FillAndExpand"/>
     </ContentPage.Content>
 </ContentPage>

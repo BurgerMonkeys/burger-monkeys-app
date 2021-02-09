@@ -180,6 +180,8 @@
     <AndroidAsset Include="Assets\monkey.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
+    <AndroidAsset Include="Assets\monkey-dark.json" />
+    <AndroidAsset Include="Assets\leitor-dark.css" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

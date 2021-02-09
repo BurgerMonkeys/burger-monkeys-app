@@ -102,6 +102,8 @@ namespace BurgerMonkeys.ViewModels
 
         private async Task GetPostsAsync()
         {
+            EmptyMessage = "Nenhum post encontrado";
+            EmptyImage = "empty.json";
             var posts = (await _postService.Get().ConfigureAwait(false)).ToList();
 
             if (posts is null && !posts.Any())
@@ -109,18 +111,17 @@ namespace BurgerMonkeys.ViewModels
 
             AllItems = posts;
 
-            Items.Clear();
+            if (Items.Any())
+                Items.Clear();
             Items.AddRange(AllItems);
 
             IsBusy = false;
-            EmptyMessage = "Nenhum post encontrado";
-            EmptyImage = "empty.json";
         }
 
         private async Task DownloadPosts()
         {
             EmptyMessage = "Carregando...";
-            EmptyImage = "monkey.json";
+            EmptyImage = App.Current.RequestedTheme == OSAppTheme.Light ? "monkey.json" : "monkey-dark.json";
 
             var wpPosts = await _wpService.GetPosts().ConfigureAwait(false);
             var posts = await _postService.Convert(wpPosts).ConfigureAwait(false);
@@ -130,6 +131,11 @@ namespace BurgerMonkeys.ViewModels
             {
                 await GetPostsAsync();
                 _loaded = true;
+            }
+            else
+            {
+                EmptyMessage = "Nenhum post encontrado";
+                EmptyImage = "empty.json";
             }
         }
 

@@ -182,6 +182,8 @@
     <BundleResource Include="Resources\monkey.json" />
     <BundleResource Include="Resources\empty.json" />
     <BundleResource Include="Resources\leitor.css" />
+    <BundleResource Include="Resources\monkey-dark.json" />
+    <BundleResource Include="Resources\leitor-dark.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\bm_pattern.imageset\" />

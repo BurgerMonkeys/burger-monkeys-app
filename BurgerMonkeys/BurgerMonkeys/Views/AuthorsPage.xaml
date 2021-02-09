@@ -87,7 +87,7 @@
                     VerticalOptions="FillAndExpand">
 
                     <forms:AnimationView
-                        Animation="monkey.json"
+                        Animation="{AppThemeBinding Dark=monkey-dark.json, Light=monkey.json}"
                         AutoPlay="True"
                         HeightRequest="30"
                         HorizontalOptions="FillAndExpand"
