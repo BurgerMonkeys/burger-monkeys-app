@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<views:BasePage
+<ContentView
     x:Class="BurgerMonkeys.Views.AuthorsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:bmui="clr-namespace:BurgerMonkeys.UI.Controls;assembly=BurgerMonkeys.UI"
-    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-    xmlns:views="clr-namespace:BurgerMonkeys.Views">
-    <ContentPage.Content>
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+    <ContentView.Content>
         <CollectionView
             ItemsSource="{Binding Authors, Mode=OneTime}"
             SelectedItem="{Binding SelectedItem}"
@@ -87,7 +86,8 @@
                     VerticalOptions="FillAndExpand">
 
                     <forms:AnimationView
-                        Animation="{AppThemeBinding Dark=monkey-dark.json, Light=monkey.json}"
+                        Animation="{AppThemeBinding Dark=monkey-dark.json,
+                                                    Light=monkey.json}"
                         AutoPlay="True"
                         HeightRequest="30"
                         HorizontalOptions="FillAndExpand"
@@ -105,5 +105,5 @@
                 </Grid>
             </CollectionView.EmptyView>
         </CollectionView>
-    </ContentPage.Content>
-</views:BasePage>
+    </ContentView.Content>
+</ContentView>
