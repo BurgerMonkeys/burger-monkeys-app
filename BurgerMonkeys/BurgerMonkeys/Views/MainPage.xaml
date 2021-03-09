@@ -12,7 +12,7 @@
     iOS:Page.UseSafeArea="True">
 
     <ContentPage.Content>
-        <xct:TabView TabStripPlacement="Bottom">
+        <xct:TabView SelectionChanged="TabView_SelectionChanged" TabStripPlacement="Bottom">
             <xct:TabViewItem
                 Icon="feed"
                 Text="Feed"
