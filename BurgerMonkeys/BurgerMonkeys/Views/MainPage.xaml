@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage
+<ContentPage
     x:Class="BurgerMonkeys.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,12 +7,13 @@
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:pages="clr-namespace:BurgerMonkeys.Views"
     Title="BurgerMonkeys"
-    android:TabbedPage.ToolbarPlacement="Bottom"
     iOS:NavigationPage.PrefersLargeTitles="True"
     iOS:Page.UseSafeArea="True">
 
+    <Label FontSize="50" Text="Teste!" />
+    <!--
     <pages:FeedPage Title="Feed" IconImageSource="feed" />
     <pages:FavoritePage Title="Favoritos" IconImageSource="favorite_folder" />
     <pages:AuthorsPage Title="Autores" IconImageSource="author" />
-
-</TabbedPage>
+    -->
+</ContentPage>
