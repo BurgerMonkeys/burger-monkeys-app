@@ -18,11 +18,7 @@
                 Text="Feed"
                 TextColor="Black"
                 TextColorSelected="Blue">
-
-                <Label
-                    HorizontalOptions="Center"
-                    Text="Conteúdo da aba feed"
-                    VerticalOptions="Center" />
+                <pages:FeedPage />
             </xct:TabViewItem>
 
             <xct:TabViewItem
@@ -30,11 +26,7 @@
                 Text="Favoritos"
                 TextColor="Black"
                 TextColorSelected="Blue">
-
-                <Label
-                    HorizontalOptions="Center"
-                    Text="Conteúdo da aba favoritos"
-                    VerticalOptions="Center" />
+                <pages:FavoritePage />
             </xct:TabViewItem>
 
             <xct:TabViewItem
@@ -42,11 +34,7 @@
                 Text="Autores"
                 TextColor="Black"
                 TextColorSelected="Blue">
-
-                <Label
-                    HorizontalOptions="Center"
-                    Text="Conteúdo da aba autores"
-                    VerticalOptions="Center" />
+                <pages:AuthorsPage />
             </xct:TabViewItem>
         </xct:TabView>
     </ContentPage.Content>
