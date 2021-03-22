@@ -1,18 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage
+<ContentPage
     x:Class="BurgerMonkeys.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:pages="clr-namespace:BurgerMonkeys.Views"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="BurgerMonkeys"
-    android:TabbedPage.ToolbarPlacement="Bottom"
     iOS:NavigationPage.PrefersLargeTitles="True"
     iOS:Page.UseSafeArea="True">
 
-    <pages:FeedPage Title="Feed" IconImageSource="feed" />
-    <pages:FavoritePage Title="Favoritos" IconImageSource="favorite_folder" />
-    <pages:AuthorsPage Title="Autores" IconImageSource="author" />
+    <ContentPage.Content>
+        <xct:TabView
+            SelectionChanged="TabView_SelectionChanged"
+            TabStripHeight="70"
+            TabStripPlacement="Bottom">
+            <xct:TabViewItem
+                Icon="feed"
+                Text="Feed"
+                TextColor="Black"
+                TextColorSelected="Blue">
+                <pages:FeedPage />
+            </xct:TabViewItem>
 
-</TabbedPage>
+            <xct:TabViewItem
+                Icon="favorite_folder"
+                Text="Favoritos"
+                TextColor="Black"
+                TextColorSelected="Blue">
+                <pages:FavoritePage />
+            </xct:TabViewItem>
+
+            <xct:TabViewItem
+                Icon="author"
+                Text="Autores"
+                TextColor="Black"
+                TextColorSelected="Blue">
+                <pages:AuthorsPage />
+            </xct:TabViewItem>
+        </xct:TabView>
+    </ContentPage.Content>
+</ContentPage>
