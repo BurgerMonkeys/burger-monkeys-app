@@ -80,7 +80,8 @@ namespace BurgerMonkeys.ViewModels
             if (authors is null || !authors.Any())
                 return;
 
-            Authors.Clear();
+            if(Authors.Any())
+                Authors.Clear();
 
             Authors.AddRange(authors);
         }

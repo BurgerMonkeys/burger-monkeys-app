@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:appfonts="clr-namespace:BurgerMonkeys.AppFonts"
     xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:pages="clr-namespace:BurgerMonkeys.Views"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
@@ -16,27 +17,61 @@
             SelectionChanged="TabView_SelectionChanged"
             TabStripHeight="70"
             TabStripPlacement="Bottom">
-            <xct:TabViewItem
-                Icon="feed"
-                Text="Feed"
-                TextColor="Black"
-                TextColorSelected="Blue">
+            <xct:TabViewItem Text="Feed">
+                <xct:TabViewItem.Icon>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="{x:Static appfonts:MaterialIcons.ScriptTextOutline}"
+                        Color="{AppThemeBinding Dark={StaticResource DarkUnselectedColor},
+                                                Light={StaticResource LightUnselectedColor}}" />
+                </xct:TabViewItem.Icon>
+                <xct:TabViewItem.IconSelected>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="{x:Static appfonts:MaterialIcons.ScriptText}"
+                        Color="{AppThemeBinding Dark={StaticResource DarkSelectedColor},
+                                                Light={StaticResource LightSelectedColor}}" />
+                </xct:TabViewItem.IconSelected>
                 <pages:FeedPage />
             </xct:TabViewItem>
 
-            <xct:TabViewItem
-                Icon="favorite_folder"
-                Text="Favoritos"
-                TextColor="Black"
-                TextColorSelected="Blue">
+            <xct:TabViewItem Text="Favoritos">
+
+                <xct:TabViewItem.Icon>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="{x:Static appfonts:MaterialIcons.FolderStarOutline}"
+                        Color="{AppThemeBinding Dark={StaticResource DarkUnselectedColor},
+                                                Light={StaticResource LightUnselectedColor}}" />
+                </xct:TabViewItem.Icon>
+                <xct:TabViewItem.IconSelected>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="{x:Static appfonts:MaterialIcons.FolderStar}"
+                        Color="{AppThemeBinding Dark={StaticResource DarkSelectedColor},
+                                                Light={StaticResource LightSelectedColor}}" />
+                </xct:TabViewItem.IconSelected>
+
                 <pages:FavoritePage />
             </xct:TabViewItem>
 
-            <xct:TabViewItem
-                Icon="author"
-                Text="Autores"
-                TextColor="Black"
-                TextColorSelected="Blue">
+            <xct:TabViewItem Text="Autores">
+
+                <xct:TabViewItem.Icon>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="{x:Static appfonts:MaterialIcons.AccountGroupOutline}"
+                        Color="{AppThemeBinding Dark={StaticResource DarkUnselectedColor},
+                                                Light={StaticResource LightUnselectedColor}}" />
+                </xct:TabViewItem.Icon>
+                <xct:TabViewItem.IconSelected>
+                    <FontImageSource
+                        FontFamily="MaterialIcons"
+                        Glyph="{x:Static appfonts:MaterialIcons.AccountGroup}"
+                        Color="{AppThemeBinding Dark={StaticResource DarkSelectedColor},
+                                                Light={StaticResource LightSelectedColor}}" />
+                </xct:TabViewItem.IconSelected>
+
                 <pages:AuthorsPage />
             </xct:TabViewItem>
         </xct:TabView>

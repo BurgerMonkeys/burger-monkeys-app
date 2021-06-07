@@ -21,7 +21,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>11.0</string>
+	<string>10</string>
 	<key>CFBundleDisplayName</key>
 	<string>BurgerMonkeys</string>
 	<key>CFBundleIdentifier</key>

@@ -2,12 +2,39 @@
 <Application
     x:Class="BurgerMonkeys.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
     <Application.Resources>
         <Color x:Key="DarkListColor">#1c1c1e</Color>
         <Color x:Key="LightListColor">white</Color>
         <Color x:Key="DarkBackgroundColor">black</Color>
         <Color x:Key="LightBackgroundColor">#f2f2f7</Color>
+
+        <Color x:Key="LightSelectedColor">#007aff</Color>
+        <Color x:Key="LightUnselectedColor">#707070</Color>
+
+        <Color x:Key="DarkSelectedColor">#66b0ff</Color>
+        <Color x:Key="DarkUnselectedColor">#707070</Color>
+
+        <Style
+            x:Key="SelectedTabIcon"
+            TargetType="FontImageSource">
+            <Setter Property="FontFamily" Value="MaterialIcons" />
+            <Setter Property="Color" Value="{AppThemeBinding Dark={StaticResource DarkSelectedColor}, Light={StaticResource LightSelectedColor}}" />
+        </Style>
+
+        <Style
+            x:Key="UnselectedTabIcon"
+            TargetType="FontImageSource">
+            <Setter Property="FontFamily" Value="MaterialIcons" />
+            <Setter Property="Color" Value="{AppThemeBinding Dark={StaticResource DarkUnselectedColor}, Light={StaticResource LightUnselectedColor}}" />
+        </Style>
+
+        <Style TargetType="xct:TabViewItem">
+            <Setter Property="FontAttributesSelected" Value="Bold" />
+            <Setter Property="TextColorSelected" Value="{AppThemeBinding Dark={StaticResource DarkSelectedColor}, Light={StaticResource LightSelectedColor}}" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource DarkUnselectedColor}, Light={StaticResource LightUnselectedColor}}" />
+        </Style>
 
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackgroundColor}, Light={StaticResource LightBackgroundColor}}" />
@@ -18,15 +45,21 @@
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackgroundColor}, Light={StaticResource LightBackgroundColor}}" />
         </Style>
 
-        <Style x:Key="ListFrame" TargetType="Frame">
+        <Style
+            x:Key="ListFrame"
+            TargetType="Frame">
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkListColor}, Light={StaticResource LightListColor}}" />
         </Style>
 
-        <Style x:Key="ListGrid" TargetType="Grid">
+        <Style
+            x:Key="ListGrid"
+            TargetType="Grid">
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkListColor}, Light={StaticResource LightListColor}}" />
         </Style>
 
-        <Style x:Key="PostTitle" TargetType="Label">
+        <Style
+            x:Key="PostTitle"
+            TargetType="Label">
             <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
             <Setter Property="FontSize" Value="Large" />
             <Setter Property="LineBreakMode" Value="TailTruncation" />

@@ -34,5 +34,12 @@
     <Folder Include="Helpers\" />
     <Folder Include="Converters\" />
     <Folder Include="Repositories\" />
+    <Folder Include="AppFonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="AppFonts\material-icons.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AppFonts\material-icons.ttf" />
   </ItemGroup>
 </Project>
